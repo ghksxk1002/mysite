@@ -22,7 +22,7 @@ public class GuestbookDao {
 			conn = getConnection();
 			
 			String sql =
-				"   select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, message" +
+				"   select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as reg_date, massage" +
 				"     from guestbook" +
 				" order by reg_date desc";
 			pstmt = conn.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class GuestbookDao {
 				vo.setNo(no);
 				vo.setName(name);
 				vo.setRegDate(regDate);
-				vo.setMessage(message);
+				vo.setText(message);
 				
 				list.add(vo);
 			}
@@ -120,7 +120,7 @@ public class GuestbookDao {
 			
 			pstmt.setString(1, vo.getName());
 			pstmt.setString(2, vo.getPassword());
-			pstmt.setString(3, vo.getMessage());
+			pstmt.setString(3, vo.getText());
 			
 			int count = pstmt.executeUpdate();
 			result = count == 1;
@@ -154,5 +154,6 @@ public class GuestbookDao {
 		} 
 		
 		return conn;
-	}	
+	}
+	
 }

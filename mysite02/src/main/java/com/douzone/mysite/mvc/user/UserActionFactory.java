@@ -9,7 +9,7 @@ public class UserActionFactory extends ActionFactory {
 	@Override
 	public Action getAction(String actionName) {
 		Action action = null;
-		System.out.println("여기는Action");
+
 		if("joinform".equals(actionName)) {
 			action = new JoinFormAction();
 		} else if("join".equals(actionName)) {
@@ -20,7 +20,9 @@ public class UserActionFactory extends ActionFactory {
 			action = new LoginFormAction();
 		} else if("login".equals(actionName)) {
 			action = new LoginAction();
-		} else {
+		} else if("logout".equals(actionName)) {
+			action = new LogoutAction();
+		} else{
 			action = new MainAction();
 		}
 		

@@ -4,8 +4,13 @@ public class GuestbookVo {
 	private Long no;
 	private String name;
 	private String password;
+	private String text;
 	private String regDate;
-	private String message;
+	@Override
+	public String toString() {
+		return "GuestBookVo [no=" + no + ", name=" + name + ", password=" + password + ", text=" + text + ", regDate="
+				+ regDate + "]";
+	}
 	public Long getNo() {
 		return no;
 	}
@@ -24,21 +29,16 @@ public class GuestbookVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
 	public String getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	@Override
-	public String toString() {
-		return "GuestbookVo [no=" + no + ", name=" + name + ", password=" + password + ", regDate=" + regDate
-				+ ", message=" + message + "]";
+	public void setRegDate(String now) {
+		this.regDate = now;
 	}
 }
