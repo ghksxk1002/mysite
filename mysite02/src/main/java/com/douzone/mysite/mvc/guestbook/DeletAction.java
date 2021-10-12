@@ -15,7 +15,6 @@ public class DeletAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 
 		String no =request.getParameter("no");
 		Long no1 = Long.parseLong(no);
@@ -25,9 +24,9 @@ public class DeletAction implements Action {
 		vo.setNo(no1);
 		vo.setPassword(password);
 		
-		//new GuestbookDao().delete(no1, password);
+		new GuestbookDao().delete(vo);
 
-		MvcUtil.redirect("/mysite02/gb?a=index.jsp", request, response);
+		MvcUtil.redirect("/mysite02/gb?a=index", request, response);
 	}
 
 }

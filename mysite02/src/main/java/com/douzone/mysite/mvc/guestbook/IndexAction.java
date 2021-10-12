@@ -3,7 +3,6 @@ package com.douzone.mysite.mvc.guestbook;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.douzone.mysite.dao.GuestbookDao;
 import com.douzone.mysite.vo.GuestbookVo;
 import com.douzone.web.mvc.Action;
+import com.douzone.web.util.MvcUtil;
 
 public class IndexAction implements Action {
 
@@ -21,8 +21,7 @@ public class IndexAction implements Action {
 
 		request.setAttribute("list", list);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
-		rd.forward(request, response);
+		MvcUtil.forward("guestbook/index", request, response);
 		
 	}
 

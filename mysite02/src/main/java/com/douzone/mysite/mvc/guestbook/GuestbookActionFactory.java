@@ -10,20 +10,14 @@ public class GuestbookActionFactory extends ActionFactory {
 	public Action getAction(String actionName) {
 		
 		Action action = null;
-		
-		if ("deleteform".equals(action)) {
-			
+		System.out.println(actionName);
+		if ("deleteform".equals(actionName)) {
 			action = new DeleteFormAction();
-			
-		} else if ("add".equals(action)) {
-			
+		} else if ("add".equals(actionName)) {
 			action = new AddAction();
-		} else if("delete".equals(action)){
-			
+		} else if("delete".equals(actionName)){
 			action = new DeletAction();
-			
 		} else {
-			
 			action = new IndexAction();
 		}
 		return action;

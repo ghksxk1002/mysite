@@ -15,6 +15,7 @@ public class AddAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("엑션반응");
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		String text = request.getParameter("message");
@@ -26,7 +27,7 @@ public class AddAction implements Action {
 		
 		new GuestbookDao().insert(vo);
 
-		MvcUtil.redirect("/mysite02/gb?a=index.jsp", request, response);
+		MvcUtil.redirect("/mysite02/gb?a=index", request, response);
 	}
 
 }
