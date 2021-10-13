@@ -1,8 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@page import="com.douzone.mysite.vo.UserVo"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%
-		UserVo userVo = (UserVo)request.getAttribute("userVo");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,22 +16,31 @@
 		<div id="content">
 			<div id="user">
 
-				<form id="join-form" name="joinForm" method="post" action="<%=request.getContextPath() %>/user?a=update">
+				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user?a=update">
 					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="<%=userVo.getName() %>"/>
+					<input id="name" name="name" type="text" value="${userVo.name }"/>
 
 					<label class="block-label" for="email">이메일</label>
-					<h3><%=userVo.getEmail() %></h3>
+					<h3>${userVo.email }</h3>
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
-					
-					<fieldset>
-						<legend>성별</legend>
-						<label>여</label> <input type="radio" name="gender" value="female" >
-						<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
-					</fieldset>
-					
+					<c:choose>
+							<c:when test="${userVo.gender eq 'male' }">
+								<fieldset>
+									<legend>성별</legend>
+									<label>여</label> <input type="radio" name="gender" value="female" >
+									<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
+								</fieldset>
+							</c:when>
+							<c:when test="${userVo.gender eq 'famale' }">
+								<fieldset>
+									<legend>성별</legend>
+									<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
+									<label>남</label> <input type="radio" name="gender" value="male" >
+								</fieldset>
+							</c:when>
+						</c:choose>
 					<input type="submit" value="수정하기">
 					
 				</form>

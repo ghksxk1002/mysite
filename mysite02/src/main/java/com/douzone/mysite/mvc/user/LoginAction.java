@@ -18,7 +18,7 @@ public class LoginAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
+		System.out.println("로그인");
 		UserVo userVo = new UserDao().findByEmailAndPassword(email, password);
 		if(userVo == null) {
 			/* 로그인 실패 */

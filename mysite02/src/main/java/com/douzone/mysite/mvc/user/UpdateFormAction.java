@@ -27,13 +27,14 @@ public class UpdateFormAction implements Action {
 			MvcUtil.redirect(request.getContextPath(), request, response);
 			return;
 		}
+		// return 으로 이 밑에 실행문은 실행되지 않는다.
 		// 쿼리로 넘버 뺴옥;
 		Long no = authUser.getNo();
 		UserVo  userVo = new UserDao().findByNo(no);
 		
-		System.out.println(authUser);
+		System.out.println(userVo);
 		request.setAttribute("userVo", userVo);
-		// return 으로 이 밑에 실행문은 실행되지 않는다.
+		
 		MvcUtil.forward("user/updateform", request, response);
 	}
 

@@ -27,8 +27,20 @@ public class UpdateAction implements Action {
 			return;
 		}
 		////////////////////////////////////////////////////////////////
-
-
+		Long no = authUser.getNo();
+		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		String gender = request.getParameter("gender");
+		
+		UserVo userVo = new UserVo();
+		userVo.setNo(no);
+		userVo.setName(name);
+		userVo.setPassword(password);
+		userVo.setGender(gender);
+		
+		new UserDao().update(userVo);
+		authUser.setName(name);
+		
 		MvcUtil.redirect(request.getContextPath(), request, response);
 
 	}
