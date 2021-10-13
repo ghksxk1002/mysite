@@ -15,12 +15,10 @@ String no = request.getParameter("no");
 			<div id="user">
 				<form method="post"
 					action="<%=request.getContextPath()%>/gb?a=delete">
-					<input type='hidden' name="no" value="<%=no%>"> <input
-						type="password" name="password"> <input type="submit"
-						value="확인">
+					<input type='hidden' name="no" value="<%=no%>"> 
+					<input type="password" name="password"> <input type="submit" value="확인">
 				</form>
-				<br /> <a href="<%=request.getContextPath()%>/gb?a=index">메인으로
-					돌아가기</a>
+				<br /> <a href="<%=request.getContextPath()%>/gb?a=index">메인으로돌아가기</a>
 			</div>
 		</div>
 		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />

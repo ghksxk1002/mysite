@@ -18,9 +18,10 @@ public class IndexAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		GuestbookDao dao = new GuestbookDao();
 		List<GuestbookVo> list = dao.findAll();
-
+		
+		// 리스트에 답은 내용은 "list"라는 이름으로 request에 담아 놓는다
 		request.setAttribute("list", list);
-
+		
 		MvcUtil.forward("guestbook/index", request, response);
 		
 	}
