@@ -67,6 +67,15 @@
 		<servlet-name>GuestbookController</servlet-name>
 		<url-pattern>/gb</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>BoardController</servlet-name>
+		<servlet-class>com.douzone.mysite.controller.BoardController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BoardController</servlet-name>
+		<url-pattern>/bd</url-pattern>
+	</servlet-mapping>
 
 
 

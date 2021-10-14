@@ -15,7 +15,9 @@ public class DeletAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		
+		// 내가 찾으려고 하는 사용자 넘버
 		String no =request.getParameter("no");
 		Long no1 = Long.parseLong(no);
 		String password = request.getParameter("password");

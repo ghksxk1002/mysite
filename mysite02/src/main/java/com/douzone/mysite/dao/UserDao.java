@@ -118,7 +118,10 @@ public class UserDao {
 		try {
 			conn = getConnection();
 
-			String sql = " select no, name " + "   from user " + "  where email=?" + "    and password=?";
+			String sql = " select no, name " + 
+						 "   from user " +
+						 "  where email=?" + 
+						 "    and password=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, email);
@@ -164,7 +167,9 @@ public class UserDao {
 		try {
 			conn = getConnection();
 
-			String sql = " insert " + "   into user " + " values(null, ?, ?, ?, ?, now())";
+			String sql = " insert " + 
+						 " into user " + 
+						 " values(null, ?, ?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
 			System.out.println(sql);
 

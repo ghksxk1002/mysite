@@ -28,14 +28,11 @@
 						<th>&nbsp;</th>
 					</tr>				
 					<c:set var='count' value='${fn:length(list)}' />
-					
 					<c:forEach items='${list }' var='vo' varStatus='status' >
 							<tr>
-								<td>${count-status.index }</td>
+								<td>${param.no }</td>
 								<td style="text-align:left; padding-left:0px">
-											<a href="${pageContext.servletContext.contextPath }/bd?a=view&no=${vo.no }">
-																									${vo.title }
-											</a></td>
+											<a href="${pageContext.servletContext.contextPath }/bd?a=view">${vo.title }</a></td>
 								<td>${vo.userName }</td>
 								<td>${vo.hit }</td>
 								<td>${vo.regDate }</td>
