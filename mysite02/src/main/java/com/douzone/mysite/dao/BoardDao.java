@@ -78,12 +78,9 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 
-			String sql = "	  select a.no, a.title, a.contents, a.hit, a.reg_date, a.group_no, a.order_no, a.depth_no, b.no"
-					   + "        from board a, user b"
-					   + "	   where a.no = b.?" 
-					   + "    order by a.group_no desc,"
-					   + "			 a.order_no asc" 
-					   + "	   limit 0, 10";
+			String sql = " select group_no, order_no, depth_no"
+					   + "   from board"
+					   + "  where no =?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setLong(1, no);
@@ -92,19 +89,15 @@ public class BoardDao {
 
 			if (rs.next()) {
 
-//				String name = rs.getString(1);
-//				String email = rs.getString(2);
-//				String password = rs.getString(3);
-//				String gender = rs.getString(4);
-//
-//
-//				vo = new UserVo();
-//			
-//				vo.setName(name);
-//				vo.setEmail(email);
-//				vo.setPassword(password);
-//				vo.setGender(gender);
-
+				Long groupNo = rs.getLong(1);
+				Long orderNo = rs.getLong(2);
+				Long depthNo = rs.getLong(3);
+				vo = new BoardVo();
+			
+				vo.setGroupNu(groupNo);
+				vo.setOrderNu(orderNo);
+				vo.setDepthNu(depthNo);
+			
 			}
 
 		} catch (SQLException e) {
@@ -138,7 +131,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 
-			String sql = "	select b.no, b.title, u.name ,b.hit, b.reg_date" + 
+			String sql = "	select b.no, b.title, u.name, b.contents, b.hit, b.reg_date, u.no, b.group_no, b.order_no, b.depth_no" + 
 						 "	 from board b, user u" +
 						 "	where b.user_no = u.no" + 
 						 " order by group_no desc, order_no asc";
@@ -149,24 +142,26 @@ public class BoardDao {
 			while (rs.next()) {
 				Long no = rs.getLong(1);
 				String title = rs.getString(2);
-				// String contents = rs.getString(3);
 				String name = rs.getString(3);
-				Long hit = rs.getLong(4);
-				String regdate = rs.getString(5);
-				// Long groupNo = rs.getLong(6);
-				// Long orderNo = rs.getLong(7);
-				// Long depthNo = rs.getLong(8);
+				String contents = rs.getString(4);
+				Long hit = rs.getLong(5);
+				String regdate = rs.getString(6);
+				Long userNo = rs.getLong(7);
+				Long groupNo = rs.getLong(8);
+				Long orderNo = rs.getLong(9);
+				Long depthNo = rs.getLong(10);
 
 				BoardVo vo = new BoardVo();
 				vo.setNo(no);
 				vo.setTitle(title);
-				// vo.setContents(contents);
+				vo.setContent(contents);
 				vo.setHit(hit);
 				vo.setRegDate(regdate);
 				vo.setUserName(name);
-//				vo.setGroupNu(groupNo);
-//				vo.setOrderNu(orderNo);
-//				vo.setDepthNu(depthNo);
+				vo.setUserNu(userNo);
+				vo.setGroupNu(groupNo);
+				vo.setOrderNu(orderNo);
+				vo.setDepthNu(depthNo);
 
 				list.add(vo);
 			}
@@ -201,12 +196,13 @@ public class BoardDao {
 			conn = getConnection();
 
 			String sql = " delete" + 
-						 "   from guestbook" + 
+						 "   from board" + 
 						 "  where no=?" + 
-						 "    and password=?";
+						 "    and user_no=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setLong(1, vo.getNo());
+			pstmt.setLong(2, vo.getUserNu());
 
 			int count = pstmt.executeUpdate();
 			result = count == 1;
@@ -229,6 +225,45 @@ public class BoardDao {
 		return result;
 	}
 
+	public boolean replay(BoardVo boardVo) {
+		boolean result = false;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+
+			String sql = "insert into board values(null, ?, ?, default, now(), ?, ?, ?, ?);";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, boardVo.getTitle());
+			pstmt.setString(2, boardVo.getContent());
+			pstmt.setLong(3, boardVo.getGroupNu());
+			pstmt.setLong(4, boardVo.getOrderNu()+1);
+			pstmt.setLong(5, boardVo.getDepthNu()+1);
+			pstmt.setLong(6, boardVo.getUserNu());
+
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+	
 	public boolean insert(BoardVo boardVo) {
 		boolean result = false;
 
@@ -320,6 +355,48 @@ public class BoardDao {
 		return vo;
 	}
 	
+	public boolean updateOrderNo(BoardVo boardVo) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			conn = getConnection();
+
+			// 3. statement 생성
+			sql = " update board"
+				+ "   set order_no = order_no+1"
+				+ " where group_no =?"
+				+ "   and order_no >?";
+			pstmt = conn.prepareStatement(sql);
+			// 4. 바인딩
+			pstmt.setLong(1, boardVo.getGroupNu());
+			pstmt.setLong(2, boardVo.getOrderNu());
+			
+			// 5. SQL 실행
+			int count = pstmt.executeUpdate();
+
+			result = count == 1;
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+		
+	}
+	
 	public boolean update(BoardVo boardVo) {
 		boolean result = false;
 		Connection conn = null;
@@ -363,6 +440,48 @@ public class BoardDao {
 		return result;
 		
 	}
+	public boolean updateHit(Long no) {
+		
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			conn = getConnection();
+
+			// 3. statement 생성
+			sql = " update board"+
+				  "   set hit = hit +1"+
+				  " where no =?";
+			pstmt = conn.prepareStatement(sql);
+			// 4. 바인딩
+			pstmt.setLong(1, no);
+			
+			// 5. SQL 실행
+			int count = pstmt.executeUpdate();
+
+			result = count == 1;
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+		
+		
+	}
+	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 		try {
@@ -375,5 +494,8 @@ public class BoardDao {
 
 		return conn;
 	}
+	
+	
+	
 
 }

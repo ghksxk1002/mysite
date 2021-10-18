@@ -13,7 +13,7 @@ import com.douzone.mysite.vo.UserVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;
 
-public class modifyAction implements Action {
+public class ModifyAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,7 +43,6 @@ public class modifyAction implements Action {
 		
 		
 		MvcUtil.redirect("/mysite02/bd?a=view&no="+no, request, response);
-		System.out.println("수정좀11");
 		
 		
 	}

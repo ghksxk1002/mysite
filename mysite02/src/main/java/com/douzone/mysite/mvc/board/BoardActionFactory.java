@@ -1,28 +1,29 @@
 package com.douzone.mysite.mvc.board;
 
-
 import com.douzone.web.mvc.Action;
 import com.douzone.web.mvc.ActionFactory;
 
 public class BoardActionFactory extends ActionFactory {
-	
-	
 
 	@Override
 	public Action getAction(String actionName) {
 		Action action = null;
 		if ("modify".equals(actionName)) {
-			action = new modifyAction();
+			action = new ModifyAction();
 		} else if ("modifyform".equals(actionName)) {
-			action = new modifyformAction();
+			action = new ModifyformAction();
 		} else if ("view".equals(actionName)) {
-			action = new viewAction();
-		} else if("write".equals(actionName)){
-			action = new writeFormAction();
-		} else if("sumit".equals(actionName)){
-			action = new sumitAction();
-		} else{
-			action = new listAction();
+			action = new ViewAction();
+		} else if ("write".equals(actionName)) {
+			action = new WriteFormAction();
+		} else if ("sumit".equals(actionName)) {
+			action = new SumitAction();
+		} else if ("del".equals(actionName)) {
+			action = new DelAction();
+		} else if ("reply".equals(actionName)) {
+			action = new ReplyAction();
+		} else {
+			action = new ListAction();
 		}
 		return action;
 	}

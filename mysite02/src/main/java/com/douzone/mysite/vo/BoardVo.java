@@ -11,7 +11,7 @@ public class BoardVo {
 	private Long groupNu;
 	private Long orderNu;
 	private Long depthNu;
-	
+
 	public Long getUserNu() {
 		return userNu;
 	}

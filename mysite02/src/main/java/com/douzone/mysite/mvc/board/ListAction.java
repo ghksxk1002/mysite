@@ -12,11 +12,11 @@ import com.douzone.mysite.vo.BoardVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;
 
-public class listAction implements Action {
+public class ListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		BoardDao dao = new BoardDao();
 		List<BoardVo> list = dao.findAll();
 		

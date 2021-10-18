@@ -33,13 +33,14 @@
 							<tr>
 								<td>${count-status.index }</td>
 								<td style="text-align:left; padding-left:0px">
-											<a href="${pageContext.servletContext.contextPath }/bd?a=view&no=${vo.no }">
-																									${vo.title }
-											</a></td>
+									<a href="${pageContext.servletContext.contextPath }/bd?a=view&no=${vo.no }&hit=${vo.hit }">${vo.title }</a>
+								</td>
 								<td>${vo.userName }</td>
 								<td>${vo.hit }</td>
 								<td>${vo.regDate }</td>
-								<td><a href="" class="del">삭제</a></td>
+								<c:if test="${authUser.no == vo.userNu }">
+								<td><a href="${pageContext.servletContext.contextPath }/bd?a=del&no=${vo.no }" class="del"></a></td>
+								</c:if>
 							</tr>
 					</c:forEach>
 				</table>

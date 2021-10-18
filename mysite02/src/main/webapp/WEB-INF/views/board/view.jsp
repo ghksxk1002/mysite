@@ -34,6 +34,8 @@
 				</table>
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath }/bd?a=list">글목록</a>
+					<a href="${pageContext.request.contextPath }/bd?a=write&no=${boardVo.no }">답글달기</a>
+					
 					<!-- 여기 이프문으로 -->
 					<c:if test="${authUser.no == boardVo.userNu }">
 						<a href="${pageContext.request.contextPath }/bd?a=modifyform&no=${boardVo.no }">글수정</a>
