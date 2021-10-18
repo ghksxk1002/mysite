@@ -32,8 +32,16 @@
 					<c:forEach items='${list }' var='vo' varStatus='status' >
 							<tr>
 								<td>${count-status.index }</td>
-								<td style="text-align:left; padding-left:0px">
-									<a href="${pageContext.servletContext.contextPath }/bd?a=view&no=${vo.no }&hit=${vo.hit }">${vo.title }</a>
+								<td style="text-align:left; padding-left:${20*vo.depthNu}px">
+								<c:if test="${vo.depthNu > 0 }">
+									<a
+										href="${pageContext.servletContext.contextPath }/board?a=delete&no=${vo.no}">
+										<img
+										src="${pageContext.servletContext.contextPath }/assets/images/reply.png">
+									</a>
+								</c:if> <a href="${pageContext.servletContext.contextPath }/bd?a=view&no=${vo.no }&hit=${vo.hit }">${vo.title }
+												</a>
+								
 								</td>
 								<td>${vo.userName }</td>
 								<td>${vo.hit }</td>
