@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
-import com.douzone.mysite.exeption.UserRepositoryExction;
+import com.douzone.mysite.exception.UserRepositoryException;
 import com.douzone.mysite.vo.UserVo;
 
 @Repository
@@ -23,9 +23,7 @@ public class UserRepository {
 			conn = getConnection();
 
 			// 3. statement 생성
-			sql = " update user" +
-				  "    set name =?, password =?, gender =?"+
-				  "  where no =?";
+			sql = " update user" + "    set name =?, password =?, gender =?" + "  where no =?";
 			pstmt = conn.prepareStatement(sql);
 			// 4. 바인딩
 			pstmt.setString(1, vo.getName());
@@ -55,7 +53,7 @@ public class UserRepository {
 		return result;
 	}
 
-	public UserVo findByNo(Long no) throws UserRepositoryExction {
+	public UserVo findByNo(Long no) throws UserRepositoryException {
 		UserVo vo = null;
 
 		Connection conn = null;
@@ -65,9 +63,7 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 
-			String sql = " select name, email, password, gender " + 
-						 "   from user " + 
-						 "  where no=?";
+			String sql = " elect name, email, password, gender " + "   from user " + "  where no=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setLong(1, no);
@@ -75,15 +71,14 @@ public class UserRepository {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-			
+
 				String name = rs.getString(1);
 				String email = rs.getString(2);
 				String password = rs.getString(3);
 				String gender = rs.getString(4);
-				
 
 				vo = new UserVo();
-			
+
 				vo.setName(name);
 				vo.setEmail(email);
 				vo.setPassword(password);
@@ -94,7 +89,7 @@ public class UserRepository {
 		} catch (SQLException e) {
 			// 서비스한테 예외를 던지는데
 			// 1. 전환 : 상위단에서 이해할수 있는 예외로 부모를 런타임 익셉션으로 해서 알아먹게 해야한다
-			throw new UserRepositoryExction(e.toString());
+			throw new UserRepositoryException(e.toString());
 		} finally {
 			try {
 				if (rs != null) {
@@ -114,7 +109,10 @@ public class UserRepository {
 		return vo;
 	}
 
-	public UserVo findByEmailAndPassword(String email, String password) {
+	public UserVo findByEmailAndPassword(
+					String email, 
+					String password) 
+					throws UserRepositoryException{
 		UserVo vo = null;
 
 		Connection conn = null;
@@ -124,10 +122,7 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 
-			String sql = " select no, name " + 
-						 "   from user " +
-						 "  where email=?" + 
-						 "    and password=?";
+			String sql = " select no, name " + "   from user " + "  where email=?" + "    and password=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, email);
@@ -145,7 +140,7 @@ public class UserRepository {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("error:" + e);
+			throw new UserRepositoryException(e.toString());
 		} finally {
 			try {
 				if (rs != null) {
@@ -173,9 +168,7 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 
-			String sql = " insert " + 
-						 " into user " + 
-						 " values(null, ?, ?, ?, ?, now())";
+			String sql = " insert " + " into user " + " values(null, ?, ?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
 			System.out.println(sql);
 

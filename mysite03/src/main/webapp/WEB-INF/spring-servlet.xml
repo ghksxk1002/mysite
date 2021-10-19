@@ -23,6 +23,8 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	
+	
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven />
 	<!--  서블릿 컨테이너(tomcat)의 디폴트 서블릿 위임(Delegate) 핸들러 : css 가 깨지면 설정해보자  -->
@@ -30,6 +32,6 @@
 	<!-- bean 설정을 어노테이션으로 할꺼라는 설정 -->
 	<context:annotation-config />
 	<!-- 컨테이너에게 알려줄 어노테이션으로 설정된 페키지의 위치와 클레스의 위치를 알려주는것 -->
-	<context:component-scan base-package="com.douzone.mysite.controller" />
+	<context:component-scan base-package="com.douzone.mysite.controller, com.douzone.mysite.exception" />
 
 </beans>
