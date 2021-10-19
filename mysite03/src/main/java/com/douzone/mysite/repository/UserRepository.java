@@ -63,7 +63,7 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 
-			String sql = " elect name, email, password, gender " + "   from user " + "  where no=?";
+			String sql = " select name, email, password, gender " + "   from user " + "  where no=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setLong(1, no);
