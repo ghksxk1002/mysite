@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
+import com.douzone.mysite.exeption.UserRepositoryExction;
 import com.douzone.mysite.vo.UserVo;
 
 @Repository
@@ -54,7 +55,7 @@ public class UserRepository {
 		return result;
 	}
 
-	public UserVo findByNo(Long no) {
+	public UserVo findByNo(Long no) throws UserRepositoryExction {
 		UserVo vo = null;
 
 		Connection conn = null;
@@ -91,7 +92,9 @@ public class UserRepository {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("error:" + e);
+			// 서비스한테 예외를 던지는데
+			// 1. 전환 : 상위단에서 이해할수 있는 예외로 부모를 런타임 익셉션으로 해서 알아먹게 해야한다
+			throw new UserRepositoryExction(e.toString());
 		} finally {
 			try {
 				if (rs != null) {
