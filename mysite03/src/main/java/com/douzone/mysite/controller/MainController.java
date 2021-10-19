@@ -2,16 +2,12 @@ package com.douzone.mysite.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
 	
-	@ResponseBody
 	@RequestMapping({"", "/"})
 	public String index() {
-		
-		return "Mysite03 resqonse Hello world";
+		return "main/index";
 	}
-	
 }
