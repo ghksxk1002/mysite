@@ -12,11 +12,11 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="guestbook" class="delete-form">
-				<form method="post" action="${pageContext.request.contextPath }/gb?a=delete">
-					<input type='hidden' name="no" value="${param.no }"> 
+				<form method="post" action="${pageContext.request.contextPath }/gb/delete">
+					<input type='hidden' name="no" value="${no }"> 
 					<input type="password" name="password"> <input type="submit" value="확인">
 				</form>
-				<br /> <a href="${pageContext.request.contextPath }/gb?a=index">메인으로돌아가기</a>
+				<br /> <a href="${pageContext.request.contextPath }/gb/index">메인으로돌아가기</a>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />

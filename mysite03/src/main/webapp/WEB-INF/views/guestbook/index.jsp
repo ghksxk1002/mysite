@@ -13,8 +13,8 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="guestbook">
-				<form action="${pageContext.request.contextPath }/gb" method="post">
-					<input type="hidden" name="a" value="add">
+				<form action="${pageContext.request.contextPath }/gb/add" method="post">
+					<input type="hidden" name="add" value="add">
 					<table border=1 width=500>
 						<tr>
 							<td>이름</td>
@@ -23,7 +23,7 @@
 							<td><input type="password" name="password"></td>
 						</tr>
 						<tr>
-							<td colspan=4><textarea name="message" cols=60 rows=5></textarea></td>
+							<td colspan=4><textarea name="text" cols=60 rows=5></textarea></td>
 						</tr>
 						<tr>
 							<td colspan=4 align=right><input type="submit" VALUE=" 확인 "></td>
@@ -40,7 +40,7 @@
 								<td>${vo.name }</td>
 								<td>${vo.regDate }</td>
 								<td><a
-									href="${pageContext.request.contextPath }/gb?a=deleteform&no=${vo.no}">삭제</a></td>
+									href="${pageContext.request.contextPath }/gb/delete/${vo.no}">삭제</a></td>
 							</tr>
 							<tr>
 								<td colspan=4>
