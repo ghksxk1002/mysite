@@ -7,6 +7,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	
 	<dependencies>
 		<!-- Servlet -->
 		<dependency>
@@ -20,8 +26,9 @@
 			<artifactId>jsp-api</artifactId>
 			<version>2.0</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>		
 	</dependencies>
+		
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
@@ -45,6 +52,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
 				</configuration>
@@ -55,12 +63,13 @@
 				<version>3.2.1</version>
 				<configuration>
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<failOnMissingWebXml>true</failOnMissingWebXml>
 				</configuration>
-			</plugin>
+			</plugin>		
 		</plugins>
 	</build>
 	<modules>
 		<module>mysite02</module>
+		<module>mysite03</module>
 	</modules>
 </project>
