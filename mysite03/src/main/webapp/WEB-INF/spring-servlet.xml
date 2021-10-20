@@ -15,9 +15,11 @@
 		http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+	<!-- Auto proxy : @ 붙어있는 어노테이션을 찾는다-->
+	<aop:aspectj-autoproxy />
 
 	<!-- ViewResolver 설정  : jsp 이름 설정-->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver, com.douzone.mysite.aspect">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />

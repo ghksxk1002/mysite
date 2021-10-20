@@ -21,9 +21,12 @@
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task.xsd">
 
-	<context:annotation-config />
+	<!-- Auto proxy : @ 붙어있는 어노테이션을 찾는다-->
+	<aop:aspectj-autoproxy />
 
-	<context:component-scan base-package="com.douzone.mysite.service, com.douzone.mysite.repository">
+	<context:annotation-config />
+	<!-- 스케닝 위치 -->
+	<context:component-scan base-package="com.douzone.mysite.service, com.douzone.mysite.repository, com.douzone.mysite.aspect">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />

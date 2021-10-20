@@ -31,7 +31,7 @@
 					
 					<c:forEach items='${list }' var='vo' varStatus='status' >
 							<tr>
-								<td>${count-status.index }</td>
+								<td>${count*pg-status.index }</td>
 								<td style="text-align:left; padding-left:${20*vo.depthNu}px">
 								<c:if test="${vo.depthNu > 0 }">
 									<a
@@ -60,7 +60,7 @@
 						<c:forEach begin="1" end="5" var="pager" step="1">
 							<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${pager}" >${pager }</a></li>
 						</c:forEach>
-						<li><a href="${pageContext.servletContext.contextPath }/bd">▶</a></li>
+						<li><a href="">▶</a></li>
 					</ul>
 				</div>					
 				<!-- pager 추가 -->

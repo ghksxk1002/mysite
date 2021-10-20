@@ -25,7 +25,10 @@ public class ListAction implements Action {
 		
 		List<BoardVo> list = dao.findAll(Integer.parseInt(page));
 		// 리스트에 답은 내용은 "list"라는 이름으로 request에 담아 놓는다
+		
 		request.setAttribute("list", list);
+		request.setAttribute("pg", page);
+		
 		
 		MvcUtil.forward("board/list", request, response);
 
