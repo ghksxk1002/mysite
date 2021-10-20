@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StopWatch;
 
 import com.douzone.mysite.exception.GuestbookRepositoryException;
 import com.douzone.mysite.vo.GuestbookVo;
@@ -19,8 +18,6 @@ public class GuestbookRepository {
 	
 	public List<GuestbookVo> findAll() throws GuestbookRepositoryException{
 		// 스프링이 제공해 주는 자신의 코드의 실행 시간을 알고 싶을때 사용하는 스탐워치
-		StopWatch sw = new StopWatch();
-		sw.start();
 		
 		List<GuestbookVo> list = new ArrayList<>();
 		
@@ -71,10 +68,6 @@ public class GuestbookRepository {
 				e.printStackTrace();
 			}
 		}
-		
-		sw.stop();
-		Long totalTime = sw.getTotalTimeMillis();
-		System.out.println("[Exection Time][GuestbookRepository.findAll]"+ totalTime + "millis");
 		
 		return list;
 	}
