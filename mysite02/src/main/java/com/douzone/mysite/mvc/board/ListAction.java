@@ -17,9 +17,13 @@ public class ListAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String page = request.getParameter("pg");
+		if(page == null) {
+			page = "1";
+		}
 		BoardDao dao = new BoardDao();
-		List<BoardVo> list = dao.findAll();
 		
+		List<BoardVo> list = dao.findAll(Integer.parseInt(page));
 		// 리스트에 답은 내용은 "list"라는 이름으로 request에 담아 놓는다
 		request.setAttribute("list", list);
 		

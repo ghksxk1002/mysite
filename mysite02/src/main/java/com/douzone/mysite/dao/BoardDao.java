@@ -121,7 +121,7 @@ public class BoardDao {
 		return vo;
 	}
 
-	public List<BoardVo> findAll() {
+	public List<BoardVo> findAll(int page) {
 		List<BoardVo> list = new ArrayList<>();
 
 		Connection conn = null;
@@ -134,9 +134,11 @@ public class BoardDao {
 			String sql = "	select b.no, b.title, u.name, b.contents, b.hit, b.reg_date, u.no, b.group_no, b.order_no, b.depth_no" + 
 						 "	 from board b, user u" +
 						 "	where b.user_no = u.no" + 
-						 " order by group_no desc, order_no asc";
+						 " order by group_no desc, order_no asc"+
+						 "    limit ?,5";
 			pstmt = conn.prepareStatement(sql);
-
+			
+			pstmt.setInt(1, (page-1)*5);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

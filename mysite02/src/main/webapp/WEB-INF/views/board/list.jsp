@@ -57,12 +57,10 @@
 				<div class="pager">
 					<ul>
 						<li><a href="">◀</a></li>
-						<li><a href="">1</a></li>
-						<li class="selected">2</li>
-						<li><a href="">3</a></li>
-						<li>4</li>
-						<li>5</li>
-						<li><a href="">▶</a></li>
+						<c:forEach begin="1" end="5" var="pager" step="1">
+							<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${pager}" >${pager }</a></li>
+						</c:forEach>
+						<li><a href="${pageContext.servletContext.contextPath }/bd">▶</a></li>
 					</ul>
 				</div>					
 				<!-- pager 추가 -->
