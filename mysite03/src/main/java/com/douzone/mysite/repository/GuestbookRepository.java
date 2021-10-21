@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.douzone.mysite.exception.GuestbookRepositoryException;
@@ -17,6 +19,9 @@ public class GuestbookRepository {
 	
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	public List<GuestbookVo> findAll() throws GuestbookRepositoryException{
 		// 스프링이 제공해 주는 자신의 코드의 실행 시간을 알고 싶을때 사용하는 스탐워치
