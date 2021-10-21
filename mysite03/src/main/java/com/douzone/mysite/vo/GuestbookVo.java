@@ -4,11 +4,11 @@ public class GuestbookVo {
 	private Long no;
 	private String name;
 	private String password;
-	private String text;
+	private String message;
 	private String regDate;
 	@Override
 	public String toString() {
-		return "GuestBookVo [no=" + no + ", name=" + name + ", password=" + password + ", text=" + text + ", regDate="
+		return "GuestBookVo [no=" + no + ", name=" + name + ", password=" + password + ", text=" + message + ", regDate="
 				+ regDate + "]";
 	}
 	public Long getNo() {
@@ -30,10 +30,10 @@ public class GuestbookVo {
 		this.password = password;
 	}
 	public String getText() {
-		return text;
+		return message;
 	}
 	public void setText(String text) {
-		this.text = text;
+		this.message = text;
 	}
 	public String getRegDate() {
 		return regDate;
