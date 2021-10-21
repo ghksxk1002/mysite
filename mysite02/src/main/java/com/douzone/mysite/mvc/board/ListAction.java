@@ -17,32 +17,32 @@ public class ListAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int startPage = 1;
-		int pageSize = 5;
-		
 		String nowPage = request.getParameter("pg");
-		if(nowPage == null) {
+
+		if (nowPage == null) {
 			nowPage = "1";
 		}
-		// board의 총 길이
 		BoardDao dao = new BoardDao();
+		// board의 총 길이
 		Long count = dao.findByListLength();
+
+		Long lastPage = (count - 1) / 5 + 1;
 		
-		Long lastPage = (count-1)/5+1; 
-		
-		if(Long.parseLong(nowPage) > lastPage) {
-			request.setAttribute("startPage", startPage+5);
-			request.setAttribute("pageSize", startPage+5);
-		}
-		
-		
+		int block = (Integer.parseInt(nowPage)+4)/5;
+		int start = (block - 1) * 5 + 1;
+		int end = block * 5;
+
 		List<BoardVo> list = dao.findAll(Integer.parseInt(nowPage));
 		// 리스트에 답은 내용은 "list"라는 이름으로 request에 담아 놓는다
-		
+
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
 		request.setAttribute("lastPage", lastPage);
 		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("start", start);
+		request.setAttribute("end", end);
+
+		System.out.println("..."+block);	
 		
 		MvcUtil.forward("board/list", request, response);
 

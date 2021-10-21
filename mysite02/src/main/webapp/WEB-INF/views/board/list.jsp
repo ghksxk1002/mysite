@@ -28,7 +28,6 @@
 						<th>&nbsp;</th>
 					</tr>				
 					<c:set var='count' value='${count}' />
-					
 					<c:forEach items='${list }' var='vo' varStatus='status' >
 							<tr>
 								<td>${(count-status.index)-(nowPage-1)*5 }</td>
@@ -56,21 +55,25 @@
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
-						<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${nowPage-1}">◀</a></li>
-						<c:forEach begin="${startPage+1 }" end="5" var="pager" step="1">
-							<c:choose>
-								<c:when test="${nowPage == pager }" >
-									<li class="selected">${pager }</li>
-								</c:when>
-									<c:when test="${lastPage >= pager}">
-										<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${pager}" >${pager }</a></li>						
+						<c:if test="${nowPage != 1 }">
+							<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${nowPage-1}">◀</a></li>
+						</c:if>
+							<c:forEach begin="${start }" end="${end }" var="pager" step="1">
+								<c:choose>
+									<c:when test="${nowPage == pager }" >
+										<li class="selected">${pager }</li>
 									</c:when>
-								<c:otherwise>
-									<li>${pager }</li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${nowPage+1}">▶</a></li>
+										<c:when test="${pager <= lastPage}">
+											<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${pager}" >${pager }</a></li>						
+										</c:when>
+									<c:otherwise>
+										<li>${pager }</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						<c:if test="${nowPage < lastPage }">
+							<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${nowPage+1}">▶</a></li>
+						</c:if>
 					</ul>
 				</div>					
 				<!-- pager 추가 -->
