@@ -45,13 +45,21 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- sprig Aspect -->
+		<!-- sprig Aspect : 마이바티스 이용을 위해 추가 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
 
+		<!-- spring jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		
 		<!-- jstl -->
 		<dependency>
 			<groupId>jstl</groupId>
@@ -65,6 +73,14 @@
 			<artifactId>mariadb-java-client</artifactId>
 			<version>2.7.2</version>
 		</dependency>
+		
+		<!-- Common DBCP : connection pool(cp)-->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+				
 		
 		<!-- logback(slf4j) -->
 		<dependency>                                    
