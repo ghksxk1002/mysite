@@ -22,7 +22,9 @@ public class BoardActionFactory extends ActionFactory {
 			action = new DelAction();
 		} else if ("reply".equals(actionName)) {
 			action = new ReplyAction();
-		} else {
+		} else if ("search".equals(actionName)) {
+			action = new SearchAction();
+		} else{
 			action = new ListAction();
 		}
 		return action;

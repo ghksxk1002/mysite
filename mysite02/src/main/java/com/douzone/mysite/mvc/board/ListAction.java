@@ -28,6 +28,7 @@ public class ListAction implements Action {
 
 		Long lastPage = (count - 1) / 5 + 1;
 		
+		// 들어오는 값으로 그 페이지 블록찾기
 		int block = (Integer.parseInt(nowPage)+4)/5;
 		int start = (block - 1) * 5 + 1;
 		int end = block * 5;
