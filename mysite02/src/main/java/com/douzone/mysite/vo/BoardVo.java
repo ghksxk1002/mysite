@@ -11,7 +11,14 @@ public class BoardVo {
 	private Long groupNu;
 	private Long orderNu;
 	private Long depthNu;
+	private Long listLength;
 
+	public Long getListLength() {
+		return listLength;
+	}
+	public void setListLength(Long listLength) {
+		this.listLength = listLength;
+	}
 	public Long getUserNu() {
 		return userNu;
 	}
@@ -76,9 +83,9 @@ public class BoardVo {
 	
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", userNu=" + userNu + ", userName=" + userName + ", title=" + title
-				+ ", content=" + content + ", hit=" + hit + ", regDate=" + regDate + ", groupNu=" + groupNu
-				+ ", orderNu=" + orderNu + ", depthNu=" + depthNu + "]";
+		return "BoardVo [no=" + no + ", userNu=" + userNu + ", userName=" + userName + ", title=" + title + ", content="
+				+ content + ", hit=" + hit + ", regDate=" + regDate + ", groupNu=" + groupNu + ", orderNu=" + orderNu
+				+ ", depthNu=" + depthNu + ", listLength=" + listLength + "]";
 	}
 
 	

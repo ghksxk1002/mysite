@@ -27,17 +27,15 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>				
-					<c:set var='count' value='${fn:length(list)}' />
+					<c:set var='count' value='${count}' />
 					
 					<c:forEach items='${list }' var='vo' varStatus='status' >
 							<tr>
-								<td>${count*pg-status.index }</td>
+								<td>${(count-status.index)-(nowPage-1)*5 }</td>
 								<td style="text-align:left; padding-left:${20*vo.depthNu}px">
 								<c:if test="${vo.depthNu > 0 }">
-									<a
-										href="${pageContext.servletContext.contextPath }/board?a=delete&no=${vo.no}">
-										<img
-										src="${pageContext.servletContext.contextPath }/assets/images/reply.png">
+									<a href="${pageContext.servletContext.contextPath }/board?a=delete&no=${vo.no}">
+										<img src="${pageContext.servletContext.contextPath }/assets/images/reply.png">
 									</a>
 								</c:if> <a href="${pageContext.servletContext.contextPath }/bd?a=view&no=${vo.no }&hit=${vo.hit }">${vo.title }
 												</a>
@@ -53,14 +51,26 @@
 					</c:forEach>
 				</table>
 				
+				
+				
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
-						<li><a href="">◀</a></li>
-						<c:forEach begin="1" end="5" var="pager" step="1">
-							<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${pager}" >${pager }</a></li>
+						<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${nowPage-1}">◀</a></li>
+						<c:forEach begin="${startPage+1 }" end="5" var="pager" step="1">
+							<c:choose>
+								<c:when test="${nowPage == pager }" >
+									<li class="selected">${pager }</li>
+								</c:when>
+									<c:when test="${lastPage >= pager}">
+										<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${pager}" >${pager }</a></li>						
+									</c:when>
+								<c:otherwise>
+									<li>${pager }</li>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
-						<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${pager}">▶</a></li>
+						<li><a href="${pageContext.servletContext.contextPath }/bd?pg=${nowPage+1}">▶</a></li>
 					</ul>
 				</div>					
 				<!-- pager 추가 -->

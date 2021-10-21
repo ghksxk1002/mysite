@@ -189,6 +189,50 @@ public class BoardDao {
 		return list;
 	}
 
+	public Long findByListLength() {
+		
+		Long count=0L;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+
+			String sql = " select count(no)"
+					   + "   from board;";
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				count = rs.getLong(1);
+				
+			
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return count;
+	}
+	
 	public boolean delete(BoardVo vo) {
 		boolean result = false;
 
