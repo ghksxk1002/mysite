@@ -27,6 +27,12 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="com.douzone.mysite.security.AuthUserHandlerMethodArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	
 	
 	<!-- interceptor -->
 	<mvc:interceptors>
@@ -35,6 +41,25 @@
 			<bean class="com.douzone.mysite.security.LoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>	
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout"/>
+			<bean class="com.douzone.mysite.security.LogoutInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>	
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<!-- 권한체크를 안하는 친구들 -->
+			<mvc:exclude-mapping path="/user/auth"/>
+			<mvc:exclude-mapping path="/user/logout"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.douzone.mysite.security.AuthInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>	
+	
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven />
 	<!--  서블릿 컨테이너(tomcat)의 디폴트 서블릿 위임(Delegate) 핸들러 : css 가 깨지면 설정해보자  -->

@@ -1,12 +1,15 @@
 package com.douzone.mysite.controller;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.douzone.mysite.security.Auth;
+import com.douzone.mysite.security.AuthUser;
 import com.douzone.mysite.service.UserService;
 import com.douzone.mysite.vo.UserVo;
 
@@ -33,26 +36,21 @@ public class UserController {
 		return "user/joinsuccess";
 	}
 	 
-	//@Auth
 	@RequestMapping(value ="/login", method = RequestMethod.GET)
 	public String login() {
 		return "user/login";
 	}
 	
-	@RequestMapping(value ="/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		session.removeAttribute("authUser");
-		session.invalidate();
-		return "redirect:/";
-	}
+//	@RequestMapping(value ="/logout", method = RequestMethod.GET)
+//	public String logout(HttpSession session) {
+//		session.removeAttribute("authUser");
+//		session.invalidate();
+//		return "redirect:/";
+//	}
 	
 	// 스프링 인터셉터가 구연해주었다
-//	@RequestMapping(value="/login", method = RequestMethod.POST)
-//	public String login(
-//			HttpSession session,
-//			@RequestParam(value = "email", required = true, defaultValue = "") String email,
-//			@RequestParam(value = "password", required = true, defaultValue = "") String password,
-//			Model model) {
+	@RequestMapping(value="/login", method = RequestMethod.POST)
+	public String login1() {
 //		
 //		UserVo userVo = userService.getUser(email, password);
 //		
@@ -65,19 +63,14 @@ public class UserController {
 //		/*인증처리*/
 //		session.setAttribute("authUser", userVo);
 //		
-//		return "redirect:/";
-//	}
+		return "redirect:/";
+	}
 	
+	@Auth
 	@RequestMapping(value ="/update", method = RequestMethod.GET)
-	public String update(HttpSession session, Model model) {
-		// 접근제어(Access Control List)
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		///////////////////////////////////////////////////////////
-		Long userNo = authUser.getNo();
-		UserVo userVo = userService.getUser(userNo);
+	public String update(@AuthUser UserVo authUser, Model model) {
+		// authUser-> 세션에 있는 유저 넘버를 가져오기 위해
+		UserVo userVo = userService.getUser(authUser.getNo());
 		model.addAttribute("userVo",userVo);
 		
 		return "user/update";

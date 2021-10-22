@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.douzone.mysite.service.GuestBookService;
 import com.douzone.mysite.vo.GuestbookVo;
 
@@ -16,7 +15,7 @@ public class GuestBookController {
 
 	@Autowired
 	private GuestBookService guestBookService;
-
+	
 	@RequestMapping("")
 	public String index(Model model) {
 		guestBookService.index(model);
