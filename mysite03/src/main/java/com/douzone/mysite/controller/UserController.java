@@ -69,7 +69,7 @@ public class UserController {
 	@Auth
 	@RequestMapping(value ="/update", method = RequestMethod.GET)
 	public String update(@AuthUser UserVo authUser, Model model) {
-		// authUser-> 세션에 있는 유저 넘버를 가져오기 위해
+	
 		UserVo userVo = userService.getUser(authUser.getNo());
 		model.addAttribute("userVo",userVo);
 		
