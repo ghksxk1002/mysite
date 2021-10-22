@@ -21,7 +21,7 @@ public class UserController {
 	public String join() {
 		return "user/join";
 	}
-
+	
 	@RequestMapping(value="/join", method = RequestMethod.POST)
 	public String join(UserVo vo) {
 		userService.join(vo);
@@ -30,10 +30,10 @@ public class UserController {
 
 	@RequestMapping("/joinsuccess")
 	public String joinsuccess() {
-		System.out.println("1");
 		return "user/joinsuccess";
 	}
-
+	 
+	//@Auth
 	@RequestMapping(value ="/login", method = RequestMethod.GET)
 	public String login() {
 		return "user/login";
@@ -46,27 +46,27 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-
-	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String login(
-			HttpSession session,
-			@RequestParam(value = "email", required = true, defaultValue = "") String email,
-			@RequestParam(value = "password", required = true, defaultValue = "") String password,
-			Model model) {
-		
-		UserVo userVo = userService.getUser(email, password);
-		
-		// 로그인 성공 확인
-		if(userVo == null) {
-			model.addAttribute("result", "fail");
-			return "user/login";
-		}
-		
-		/*인증처리*/
-		session.setAttribute("authUser", userVo);
-		
-		return "redirect:/";
-	}
+	// 스프링 인터셉터가 구연해주었다
+//	@RequestMapping(value="/login", method = RequestMethod.POST)
+//	public String login(
+//			HttpSession session,
+//			@RequestParam(value = "email", required = true, defaultValue = "") String email,
+//			@RequestParam(value = "password", required = true, defaultValue = "") String password,
+//			Model model) {
+//		
+//		UserVo userVo = userService.getUser(email, password);
+//		
+//		// 로그인 성공 확인
+//		if(userVo == null) {
+//			model.addAttribute("result", "fail");
+//			return "user/login";
+//		}
+//		
+//		/*인증처리*/
+//		session.setAttribute("authUser", userVo);
+//		
+//		return "redirect:/";
+//	}
 	
 	@RequestMapping(value ="/update", method = RequestMethod.GET)
 	public String update(HttpSession session, Model model) {

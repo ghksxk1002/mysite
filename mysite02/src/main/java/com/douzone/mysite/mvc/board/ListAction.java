@@ -18,7 +18,7 @@ public class ListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String nowPage = request.getParameter("pg");
-
+		
 		if (nowPage == null) {
 			nowPage = "1";
 		}
@@ -42,8 +42,7 @@ public class ListAction implements Action {
 		request.setAttribute("nowPage", nowPage);
 		request.setAttribute("start", start);
 		request.setAttribute("end", end);
-
-		System.out.println("..."+block);	
+	
 		
 		MvcUtil.forward("board/list", request, response);
 
