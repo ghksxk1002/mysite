@@ -8,7 +8,6 @@ import com.douzone.mysite.security.Auth;
 @Controller
 public class MainController {
 	
-	@Auth
 	@RequestMapping({"", "/"})
 	public String index() {
 		return "main/index";

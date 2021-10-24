@@ -5,9 +5,11 @@
 		<!-- 숏컷 말들기 alias는 소문자로 하는것이 관래, type이 내가 만들 숏컷 alias는 별병 : 파라미터 맵핑을 ㅎ나것이다-->
 		<typeAlias type="com.douzone.mysite.vo.GuestbookVo" alias="guestbookvo" />
 		<typeAlias type="com.douzone.mysite.vo.UserVo" alias="uservo" />
+		<typeAlias type="com.douzone.mysite.vo.GalleryVo" alias="galleryvo" />
     </typeAliases>	
 	<mappers>
 		<mapper resource="mybatis/mappers/guestbook.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
+		<mapper resource="mybatis/mappers/gallery.xml" />
 	</mappers>
 </configuration>

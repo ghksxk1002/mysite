@@ -45,6 +45,21 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+			<!-- common fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		
+		<!-- common IO -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+		
 		<!-- sprig Aspect : 마이바티스 이용을 위해 추가 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
