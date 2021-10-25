@@ -9,38 +9,8 @@
 <link href="${pageContext.request.contextPath }/assets/css/user.css"
 	rel="stylesheet" type="text/css">
 <!-- 제이쿼리 함수 소환 -->
-<script
-	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+<script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script>
-	/* setTimeout(function() {
-	
-	 $.ajax({
-	 url:"${pageContext.request.contextPath }/msg02", 
-	 type:"get", 
-	 dataType:"json", 
-	 success:function(response){
-	 console.log(response);
-	 p = $("#test");
-	 p.html("<strong>"+ response.message +"</strong>");
-	 }
-	 });
-	 }, 3000);
-	 */
-
-	// jquery로 중복체크 만들기
-	// check 하는 id를 가진 id를 찾는다
-	// 브라우저 돔이 바디를 다 읽고 로딩이 끝나면
-	// id를 찾는다
-	/*  window.onload=function(){
-	 console.log("loaded");
-
-	 btnCheckEmail = $("#check")
-	 btnCheckEmail.click(function() {
-	 console.log("click");
-	 });
-	 };
-	 */
-	// jquery로 중복체크 만들기
 $(function(){
 	$("#btn-check-email").click(function() {
 		var email = $("#email").val();
@@ -53,10 +23,16 @@ $(function(){
 			url: "${pageContext.request.contextPath }/user/api/checkemail?email=" + email,
 			type: "get",
 			dataType: "json",
+			error:function(xhr, status, e){
+				console.log(status, e);
+			},
 			success: function(response) {
 				console.log(response);
-				
-				if(response.exist) {
+				if(response.result!= "success"){
+					console.error(message);
+					return;
+				}
+				if(response.date) {
 					alert("존재하는 이메일입니다. 다른 이메일을 사용하세요.");
 					$("#email")
 						.val("")
