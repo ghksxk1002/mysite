@@ -1,5 +1,6 @@
 package com.douzone.mysite.exception;
 
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.douzone.mysite.dto.JsonRrsult;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ControllerAdvice
 public class GlobleExceptionHendler {
@@ -32,12 +34,35 @@ public class GlobleExceptionHendler {
 	
 		
 		// 2. 요청 구분
-		JsonRrsult.fail(errors.toString());
-		// 3. 사과페이지(사과 페이지로 가면 정상적으로 종료것이다)
-		request.setAttribute("exception", errors.toString());
-		request
+		// 만약,JSON 요청인 경우, request header의 Accept에 application/json
+		// 만약,HTMP 요청인 경우, request header의 Accept에 text/html
+		
+		// 헤더의 내용 뽑기
+		String accept = request.getHeader("accept");
+		// 페터매칭 : 정규식을 써줘야한다다".*"
+		// application/json 이 문자열이 포함된
+		if(accept.matches(".*application/json.*")) {
+			//3. JSON 응답
+			JsonRrsult result = JsonRrsult.fail(errors.toString());
+			// 젝슨라이브러리를 직덥 사용해서 제이슨 생성 
+			String jsonString = new ObjectMapper().writeValueAsString(result);
+		
+			// SC_OK : 500 에러
+			response.setStatus(HttpServletResponse.SC_OK);
+			OutputStream os = response.getOutputStream();
+			os.write(jsonString.getBytes("utf-8"));
+			os.close();
+			
+		} else {
+			// 4. 사과페이지(사과 페이지로 가면 정상적으로 종료것이다), HTML 응답
+			request.setAttribute("exception", errors.toString());
+			request
 			.getRequestDispatcher("/WEB-INF/views/error/exception.jsp")
 			.forward(request, response);
+			
+		}
+		
+		
 		
 	
 	}

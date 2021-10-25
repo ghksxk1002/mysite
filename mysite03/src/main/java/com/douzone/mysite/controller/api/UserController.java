@@ -26,7 +26,6 @@ public class UserController {
 //		map.put("date", userVo != null);
 //		map.put("result", "success");
 //		map.put("message", null);
-		
 		return JsonRrsult.success(userVo != null);
 	}
 }
