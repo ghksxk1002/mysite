@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="guestbook">
-	<insert id="insert" parameterType="guestbookvo">
-		<![CDATA[
-		insert into guestbook values (null, #{name }, #{password }, #{message }, now())
+<mapper namespace="board">
+	<resultMap type="boardvo" id="resultMapList">
+		<result column="no" property="no" />
+		<result column="title" property="title" />
+		<result column="contents" property="contents" />
+		<result column="reg_date" property="regDate" />
+		<result column="hit" property="hit" />
+		<result column="group_no" property="groupNo" />
+		<result column="order_no" property="orderNo" />
+		<result column="depth_no" property="depth" />
+		<result column="user_no" property="userNo" />
+		<result column="name" property="userName" />
+	</resultMap>
+	
+	<select id="findAll" resultMap="resultMapList" parameterType="map" resultType="boardvo">
+		<![CDATA[ 
+		select b.no, b.title, u.name, b.contents, b.hit, b.reg_date, u.no, b.group_no, b.order_no, b.depth_no
+		  from board b, user u
+		 where b.user_no = u.no
+	  order by group_no desc, order_no asc
+		 limit #{startIndex},5
 		]]>
 		
-		<selectKey keyProperty="no" resultType="long" order="AFTER">
-		<![CDATA[
-		select last_insert_id();
-		]]>			
-		</selectKey>
-	</insert>
+		
+	</select>
 	
-	<delete id="delete" parameterType="guestbookvo">
-		<![CDATA[
-		delete from guestbook where no=#{no } and password=#{password }
-		]]>
-	</delete>
-	
-	<select id="findAll" resultType="guestbookvo">
-		<![CDATA[
-			select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regdate, message 
-			  from guestbook 
-	      order by reg_date desc
+	<select id="findByListLength" resultType="long">
+		<![CDATA[ 
+		select count(*) from board
 		]]>
 	</select>
+	
 </mapper>

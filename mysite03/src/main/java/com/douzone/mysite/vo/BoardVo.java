@@ -2,29 +2,16 @@ package com.douzone.mysite.vo;
 
 public class BoardVo {
 	private Long no;
-	private Long userNu;
-	private String userName;
 	private String title;
-	private String content;
-	private Long hit;
+	private String contents;
 	private String regDate;
-	private Long groupNu;
-	private Long orderNu;
-	private Long depthNu;
-	private Long listLength;
-
-	public Long getListLength() {
-		return listLength;
-	}
-	public void setListLength(Long listLength) {
-		this.listLength = listLength;
-	}
-	public Long getUserNu() {
-		return userNu;
-	}
-	public void setUserNu(Long userNu) {
-		this.userNu = userNu;
-	}
+	private Integer hit;
+	private Integer groupNo;
+	private Integer orderNo;
+	private Integer depth;
+	private Long userNo;
+	private String userName;
+	
 	public Long getNo() {
 		return no;
 	}
@@ -37,17 +24,11 @@ public class BoardVo {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
-		return content;
+	public String getContents() {
+		return contents;
 	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public Long getHit() {
-		return hit;
-	}
-	public void setHit(Long hit) {
-		this.hit = hit;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 	public String getRegDate() {
 		return regDate;
@@ -55,38 +36,46 @@ public class BoardVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public Long getGroupNu() {
-		return groupNu;
+	public Integer getHit() {
+		return hit;
 	}
-	public void setGroupNu(Long groupNu) {
-		this.groupNu = groupNu;
+	public void setHit(Integer hit) {
+		this.hit = hit;
 	}
-	public Long getOrderNu() {
-		return orderNu;
+	public Integer getGroupNo() {
+		return groupNo;
 	}
-	public void setOrderNu(Long orderNu) {
-		this.orderNu = orderNu;
+	public void setGroupNo(Integer groupNo) {
+		this.groupNo = groupNo;
 	}
-	public Long getDepthNu() {
-		return depthNu;
+	public Integer getOrderNo() {
+		return orderNo;
 	}
-	public void setDepthNu(Long depthNu) {
-		this.depthNu = depthNu;
+	public void setOrderNo(Integer orderNo) {
+		this.orderNo = orderNo;
 	}
-	
+	public Integer getDepth() {
+		return depth;
+	}
+	public void setDepth(Integer depth) {
+		this.depth = depth;
+	}
+	public Long getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(Long userNo) {
+		this.userNo = userNo;
+	}
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", userNu=" + userNu + ", userName=" + userName + ", title=" + title + ", content="
-				+ content + ", hit=" + hit + ", regDate=" + regDate + ", groupNu=" + groupNu + ", orderNu=" + orderNu
-				+ ", depthNu=" + depthNu + ", listLength=" + listLength + "]";
+		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", regDate=" + regDate + ", hit="
+				+ hit + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", userNo=" + userNo
+				+ ", userName=" + userName + "]";
 	}
-
-	
 }
