@@ -32,6 +32,10 @@ public class UserRepository {
 	public UserVo findByNo(Long no) throws UserRepositoryException {
 		return sqlSession.selectOne("findByNo",no);
 	}
+	
+	public UserVo findByEmail(String email) {
+		return sqlSession.selectOne("user.findByEmail", email);
+	}
 
 	public UserVo findByEmailAndPassword(
 					String email, 
