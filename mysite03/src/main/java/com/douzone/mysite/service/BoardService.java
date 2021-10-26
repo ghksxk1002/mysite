@@ -43,21 +43,19 @@ public class BoardService {
 	}
 
 	public BoardVo showContents(Long no) {
-		BoardVo vo = boardRepository.findByTitleandContents(no);
-		return vo;
+		return boardRepository.findByTitleandContents(no);
 	}
 
 	public boolean write(BoardVo vo) {
 		return boardRepository.insert(vo);
 	}
 	
-	// 답글 
-	public boolean write(Long no) {
-		return boardRepository.replay(no);
-	}
-
 	public boolean delete(Long no) {
 		return boardRepository.delete(no);
+	}
+
+	public boolean update(BoardVo vo) {
+		return boardRepository.update(vo);
 	}
 
 }

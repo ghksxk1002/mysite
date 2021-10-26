@@ -39,17 +39,9 @@ public class BoardRepository {
 		return 1 == sqlSession.delete("board.delete", no);
 	}
 
-	public boolean replay(Long no) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(BoardVo vo) {
+		return 1 == sqlSession.update("board.update", vo);
 	}
-
-//	public BoardVo updateHit(Long hit, Long no) {
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		map.put("updatehit", map);
-//		return sqlSession.selectOne("board.updateHit", map);
-//	}
 	
 	
 }

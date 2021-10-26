@@ -34,64 +34,60 @@ public class BoardController {
 		return "board/index";
 	}
 	
+	@RequestMapping("/view/{no}")
+	public String view(
+			@PathVariable("no") Long no,
+			Model model) {
+		BoardVo vo = boardService.showContents(no);
+		model.addAttribute("vo", vo);
+		return "board/view";
+	}
+	
+	// 글수정
 	@Auth
-	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public String write() {
+	@RequestMapping("/modify/{no}")
+	public String modify(
+			@PathVariable("no") Long no,
+			Model model) {
+		BoardVo vo = boardService.showContents(no);
+		model.addAttribute("vo",vo);
+		return "board/modify";
+	}
+	
+	@Auth
+	@RequestMapping(value="/modify", method = RequestMethod.POST)
+	public String modify(BoardVo vo) {
+		boardService.update(vo);
+		return "redirect:/board";
+	}
+	
+	
+	@Auth
+	@RequestMapping(value={"/write", "/write/{no}"}, method=RequestMethod.GET)
+	public String write(@PathVariable(value = "no", required = false) Long no, Model model, BoardVo vo){
+		if(no != null) {
+			model.addAttribute("no", no);
+		}
+		System.out.println("writeFron:"+vo);
 		return "board/write";
 	}
 	
 	@Auth
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String write(@AuthUser UserVo authUser, BoardVo vo) {
+		
+		System.out.println(vo);
 		vo.setUserNo(authUser.getNo());
+		
 		boardService.write(vo);
 		
 		return "redirect:/board";
 	}
-	
-	// 글수정
-	@Auth
-	@RequestMapping("/modify")
-	public String modify() {
-		return "board/modify";
-	}
-	
-	
-	
-	// 답글
-	@Auth
-	@RequestMapping(value="/write/{no}", method=RequestMethod.GET)
-	public String write(
-			@AuthUser UserVo authUser,
-			@PathVariable("no") Long no,
-			BoardVo vo) {
-		vo.setUserNo(authUser.getNo());
-		boardService.write(vo);
-		
-		return "redirect:/board";
-	}
-	
 	
 	@Auth
 	@RequestMapping(value="/delete/{no}", method = RequestMethod.GET)
 	public String delete(
 			@PathVariable("no") Long no) {
-		boardService.delete(no);
 		return "redirect:/board";
 	}
-	
-	@RequestMapping("/view/{no}")
-	public String view(
-			@PathVariable("no") Long no,
-			@AuthUser UserVo authUser,
-			Model model) {
-		System.out.println(no);
-		BoardVo vo = boardService.showContents(no);
-		model.addAttribute("vo", vo);
-		return "board/view";
-	}
-	
-	
-	
-	
 }

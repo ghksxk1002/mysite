@@ -34,7 +34,7 @@
 				</table>
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath }/board">글목록</a>
-					<a href="${pageContext.request.contextPath }/board/write/${vo.no }">답글달기</a>
+					<a href="${pageContext.request.contextPath }/board/write/${vo.no }?gn=${vo.groupNo}&on=${vo.orderNo}&dp=${vo.depth}">답글달기</a>
 					
 					<!-- 여기 이프문으로 -->
 					<c:if test="${authUser.no == vo.userNo }">

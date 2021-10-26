@@ -17,7 +17,6 @@ public class ReplyAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		/* 뭘 받아야할까?
 		 * 
 		 *  그럼 부모글의 그룹넘버를 set 하고
