@@ -19,7 +19,6 @@ public class ViewAction implements Action {
 		
 		// 내가 찾으려고 하는 게시물넘버 받기http://localhost:8080/mysite02/bd?a=view
 		Long no = Long.parseLong(request.getParameter("no"));
-		System.out.println(no);
 		
 		new BoardDao().updateHit(no);
 		BoardVo boardVo = new BoardDao().findByTitleandContents(no);

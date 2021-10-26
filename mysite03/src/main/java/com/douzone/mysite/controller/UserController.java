@@ -1,10 +1,15 @@
 package com.douzone.mysite.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,8 +31,27 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method = RequestMethod.POST)
-	public String join(UserVo vo) {
-		userService.join(vo);
+	public String join(@Valid UserVo vo, BindingResult result) {
+		
+		// 발리드 값 셋팅
+		// 1. reuslt에 에러가 있느닞 확인
+		if(result.hasErrors()) {
+			List<ObjectError> list = result.getAllErrors();
+			for(ObjectError error : list) {
+				// 출력되는 에러내용을 사용자에게 알려주기위해 join으로 돌려주어야 한다
+				// 그러기 위해서는 result 안에 리스트로 들어가 있는 에러내용을 뽑아내야 한는데
+				// 스프링에서 태그를 지원해준다 jsp로 가자 고고
+				System.err.println(error);
+				
+				
+			}
+			
+			// 에러가 있으면 조인으로 돌려야됨
+			return "user/join";
+		}
+		
+		
+		//userService.join(vo);
 		return "redirect:/user/joinsuccess";
 	}
 
@@ -47,24 +71,7 @@ public class UserController {
 //		session.invalidate();
 //		return "redirect:/";
 //	}
-	
-	// 스프링 인터셉터가 구연해주었다
-	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String login1() {
-//		
-//		UserVo userVo = userService.getUser(email, password);
-//		
-//		// 로그인 성공 확인
-//		if(userVo == null) {
-//			model.addAttribute("result", "fail");
-//			return "user/login";
-//		}
-//		
-//		/*인증처리*/
-//		session.setAttribute("authUser", userVo);
-//		
-		return "redirect:/";
-	}
+
 	
 	@Auth
 	@RequestMapping(value ="/update", method = RequestMethod.GET)

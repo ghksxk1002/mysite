@@ -20,7 +20,7 @@
 				</form>
 				<table class="tbl-ex">
 					<tr>
-						<th>번호 ${map.nowPage }</th>
+						<th>번호</th>
 						<th>제목</th>
 						<th>글쓴이</th>
 						<th>조회수</th>
@@ -36,16 +36,22 @@
 									<a href="${pageContext.servletContext.contextPath }/board/delete/${vo.no}">
 										<img src="${pageContext.servletContext.contextPath }/assets/images/reply.png">
 									</a>
-								</c:if> <a href="${pageContext.servletContext.contextPath }/board/view/${vo.no }/${vo.hit }">${vo.title } 
+								</c:if> <a href="${pageContext.servletContext.contextPath }/board/view/${vo.no }">${vo.title } 
 												</a>
 								
 								</td>
 								<td>${vo.userName }</td>
 								<td>${vo.hit }</td>
 								<td>${vo.regDate }</td>
-								<c:if test="${authUser.no == vo.userNo }">
-								<td><a href="${pageContext.servletContext.contextPath }/board/delete${vo.no }" class="delete"></a></td>
-								</c:if>
+								<c:choose>
+									<c:when test="${not empty authUser && authUser.no == vo.userNo }">
+										<td><a href="${pageContext.servletContext.contextPath }/board/delete/${vo.no}" class="delete">
+										<img src="${pageContext.servletContext.contextPath }/assets/images/recycle.png"></a></td>
+									</c:when>
+									<c:otherwise>
+										&nbsp;
+									</c:otherwise>
+								</c:choose>
 							</tr>
 					</c:forEach>
 				</table>
@@ -56,7 +62,7 @@
 				<div class="pager">
 					<ul>
 						<c:if test="${map.nowPage != 1 }">
-							<li><a href="${pageContext.servletContext.contextPath }/board/${map.nowPage-1}">◀</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/board?pager=${map.nowPage-1}">◀</a></li>
 						</c:if>
 							<c:forEach begin="${map.start }" end="${map.end }" var="pager" step="1">
 								<c:choose>

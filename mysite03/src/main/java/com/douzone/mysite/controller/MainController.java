@@ -2,15 +2,21 @@ package com.douzone.mysite.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.douzone.mysite.security.Auth;
+import com.douzone.mysite.security.AuthUser;
+import com.douzone.mysite.vo.UserVo;
+
 @Controller
 public class MainController {
 	
+	@Auth
 	@RequestMapping({"", "/"})
-	public String index() {
+	public String index(@AuthUser UserVo userVo) {
 		return "main/index";
 	}
 	

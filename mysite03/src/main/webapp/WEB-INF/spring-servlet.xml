@@ -29,12 +29,6 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<mvc:annotation-driven>
-		<mvc:argument-resolvers>
-			<bean
-				class="com.douzone.mysite.security.AuthUserHandlerMethodArgumentResolver" />
-		</mvc:argument-resolvers>
-	</mvc:annotation-driven>
 
 
 	<!-- interceptor -->
@@ -78,27 +72,34 @@
 	</bean>
 
 	<!-- mvc url-resource mapping -->
-	<mvc:resources mapping="/gallery/images/**" location="file:/upload-mysite/" />
+	<mvc:resources mapping="/gallery/images/**"
+		location="file:/upload-mysite/" />
 
 
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
-	<mvc:annotation-driven >
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean
+				class="com.douzone.mysite.security.AuthUserHandlerMethodArgumentResolver" />
+		</mvc:argument-resolvers>
 		<mvc:message-converters>
-			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
 				<property name="supportedMediaTypes">
 					<list>
 						<value>text/html; charset=UTF-8</value>
 					</list>
 				</property>
-				</bean>
-			
-				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>application/json; charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>	
+			</bean>
+
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	<!-- 서블릿 컨테이너(tomcat)의 디폴트 서블릿 위임(Delegate) 핸들러 : css 가 깨지면 설정해보자 -->

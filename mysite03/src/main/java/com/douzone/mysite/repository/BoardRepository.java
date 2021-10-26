@@ -26,4 +26,30 @@ public class BoardRepository {
 	public Long findByListLength() {
 		return sqlSession.selectOne("board.findByListLength");
 	}
+
+	public BoardVo findByTitleandContents(Long no) {
+		return sqlSession.selectOne("board.findByTitleandContents", no);
+	}
+
+	public boolean insert(BoardVo vo) {
+		return 1 == sqlSession.insert("board.insert",vo);
+	}
+
+	public boolean delete(Long no) {
+		return 1 == sqlSession.delete("board.delete", no);
+	}
+
+	public boolean replay(Long no) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+//	public BoardVo updateHit(Long hit, Long no) {
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("updatehit", map);
+//		return sqlSession.selectOne("board.updateHit", map);
+//	}
+	
+	
 }

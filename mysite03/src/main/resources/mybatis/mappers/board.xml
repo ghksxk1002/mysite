@@ -16,7 +16,7 @@
 	
 	<select id="findAll" resultMap="resultMapList" parameterType="map" resultType="boardvo">
 		<![CDATA[ 
-		select b.no, b.title, u.name, b.contents, b.hit, b.reg_date, u.no, b.group_no, b.order_no, b.depth_no
+		select b.no, b.title, u.name, b.contents, b.hit, b.reg_date, b.group_no, b.order_no, b.depth_no, u.no as user_no
 		  from board b, user u
 		 where b.user_no = u.no
 	  order by group_no desc, order_no asc
@@ -26,10 +26,41 @@
 		
 	</select>
 	
+	<select id="findByTitleandContents" parameterType="long" resultType="boardvo">
+		<![CDATA[ 
+		select no, title, contents, user_no from board where no=#{no}
+		]]>
+	</select>
+	
 	<select id="findByListLength" resultType="long">
 		<![CDATA[ 
 		select count(*) from board
 		]]>
 	</select>
+	
+	<select id="updateHit" parameterType="map" resultType="boardvo">
+		<![CDATA[ 
+		update board set hit = #{hit} +1 where no =#{no}
+		]]>
+	</select>
+	
+	<insert id="insert"  parameterType="boardvo">
+		<![CDATA[ 
+		insert into board values(null, #{title}, #{contents}, default, now(), ifnull((select max(group_no) from board b), 0)+1, 0, 0, #{userNo})
+		]]>
+		
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
+		<![CDATA[
+		select last_insert_id();
+		]]>	
+		</selectKey>
+	</insert>
+	
+	<delete id="delete" parameterType="boardvo">
+		<![CDATA[
+		delete from board where no=#{no } 
+		]]>
+	</delete>
+	
 	
 </mapper>

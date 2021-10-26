@@ -13,16 +13,7 @@
 		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="${pageContext.request.contextPath }/bd">
-				<c:choose>
-					<c:when test="${empty param.no}" >
-						<input type = "hidden" name = "a" value="sumit">
-					</c:when>
-					<c:otherwise>
-						<input type = "hidden" name = "a" value="reply">
-						<input type = "hidden" name = "no" value="${param.no }">
-					</c:otherwise>
-				</c:choose>
+				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board/write">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -34,12 +25,12 @@
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="content" name="content"></textarea>
+								<textarea id="content" name="contents"></textarea>
 							</td>
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="${pageContext.request.contextPath }/bd">취소</a>
+						<a href="${pageContext.request.contextPath }/board">취소</a>
 						<input type="submit" value="등록">
 					</div>
 				</form>				

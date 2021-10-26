@@ -21,24 +21,24 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>${boardVo.title }</td>
+						<td>${vo.title }</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								${fn:replace(boardVo.content, newline, "<br/>") }
+								${fn:replace(vo.contents, newline, "<br/>") }
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/bd?a=list">글목록</a>
-					<a href="${pageContext.request.contextPath }/bd?a=write&no=${boardVo.no }">답글달기</a>
+					<a href="${pageContext.request.contextPath }/board/list">글목록</a>
+					<a href="${pageContext.request.contextPath }/board/write/${vo.no }">답글달기</a>
 					
 					<!-- 여기 이프문으로 -->
 					<c:if test="${authUser.no == boardVo.userNu }">
-						<a href="${pageContext.request.contextPath }/bd?a=modifyform&no=${boardVo.no }">글수정</a>
+						<a href="${pageContext.request.contextPath }/board/modify/${vo.no }">글수정</a>
 					</c:if>
 				</div>
 			</div>

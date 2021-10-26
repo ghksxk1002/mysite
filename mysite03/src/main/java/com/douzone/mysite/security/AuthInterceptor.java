@@ -23,7 +23,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
 		// 3. HandlerMethod 의 @Auth 받아오기
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
-		System.out.println(auth);
+		//System.out.println(auth);
 
 		// 4. HandlerMethod 에 @Auth가 없으면 TYPE 에 붙어있는지 확인
 		if (auth == null) {
@@ -50,14 +50,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 
-		// 7. 권한 체크를 위해서 @Auth의 rolw 가져오기("USER", "ADMIN")
+		// 7. 권한 체크를 위해서 @Auth의 role 가져오기("USER", "ADMIN")
 		String role = auth.role();
 
 		// 8. @Auth의 role이 "USER" 인 경우, authUser의 role은 상관없다.
 		if ("USER".equals(role)) {
 			return true;
 		}
-
 		// 9.@Auth의 role이 "ADMIN" 인 경우, authUser의 role은 "ADMIN" 이어야 한다.
 		if ("ADMIN".equals(authUser.getRole()) == false) {
 			response.sendRedirect(request.getContextPath());
@@ -67,7 +66,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// 옳은 관리자 권한
 		// @Auth의 role: "ADMIN"
 		// authUser의 role: "ADMIN"
-		return false;
+		return true;
 	}
 
 }

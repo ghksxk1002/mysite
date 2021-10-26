@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.douzone.mysite.repository.BoardRepository;
 import com.douzone.mysite.vo.BoardVo;
 
@@ -31,6 +32,7 @@ public class BoardService {
 		List<BoardVo> list = boardRepository.findAll(nowPage);
 		// 리스트에 답은 내용은 "list"라는 이름으로 request에 담아 놓는다
 		Map<String, Object> map = new HashMap<String, Object>();
+
 		map.put("list", list);
 		map.put("count", count);
 		map.put("lastPage", lastPage);
@@ -38,6 +40,24 @@ public class BoardService {
 		map.put("start", start);
 		map.put("end", end);
 		return map;
+	}
+
+	public BoardVo showContents(Long no) {
+		BoardVo vo = boardRepository.findByTitleandContents(no);
+		return vo;
+	}
+
+	public boolean write(BoardVo vo) {
+		return boardRepository.insert(vo);
+	}
+	
+	// 답글 
+	public boolean write(Long no) {
+		return boardRepository.replay(no);
+	}
+
+	public boolean delete(Long no) {
+		return boardRepository.delete(no);
 	}
 
 }
