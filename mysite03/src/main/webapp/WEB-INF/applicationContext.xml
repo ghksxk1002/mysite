@@ -33,13 +33,13 @@
 		<property name="password" value="webdb" />
 	</bean>
 	
-	<!-- MyBatis SqlSessionFactoryBean --> 
+	<!-- MyBatis SqlSessionFactoryBean : 명시작 --> 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
 		<property name="dataSource" ref="dataSource" /> 
 		<property name="configLocation" value="classpath:mybatis/configuration.xml" /> 
 	</bean>
 	
-	<!-- MyBatis SqlSessionTemplate --> 
+	<!-- MyBatis SqlSessionTemplate : 명시적--> 
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>

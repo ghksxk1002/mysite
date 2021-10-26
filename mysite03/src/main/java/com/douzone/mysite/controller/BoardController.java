@@ -2,6 +2,7 @@ package com.douzone.mysite.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,10 @@ public class BoardController {
 
 	@RequestMapping("")
 	public String index(
-			@RequestParam(value = "pager", required = true, defaultValue = "1") Long nowPage
-			, Model model) {
+			@RequestParam(value = "pager", required = true, defaultValue = "1") Long nowPage,
+			@AuthUser UserVo authUser,
+			Model model) {
 		Map<String, Object> map = boardService.getContentsList(nowPage);
-		//model.addAttribute("authUser", authUser.getNo());
 		model.addAttribute("map", map);
 		return "board/index";
 	}
@@ -47,6 +48,15 @@ public class BoardController {
 		
 		return "redirect:/board";
 	}
+	
+	// 글수정
+	@Auth
+	@RequestMapping("/modify")
+	public String modify() {
+		return "board/modify";
+	}
+	
+	
 	
 	// 답글
 	@Auth
@@ -75,10 +85,8 @@ public class BoardController {
 			@PathVariable("no") Long no,
 			@AuthUser UserVo authUser,
 			Model model) {
+		System.out.println(no);
 		BoardVo vo = boardService.showContents(no);
-		vo.setUserNo(authUser.getNo());
-		System.out.println("userNo:"+authUser.getNo());
-		
 		model.addAttribute("vo", vo);
 		return "board/view";
 	}

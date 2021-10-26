@@ -78,15 +78,21 @@
 								</c:choose>
 							</c:forEach>
 						<c:if test="${map.nowPage < map.lastPage }">
-							<li><a href="${pageContext.servletContext.contextPath }/board?pager=${map.nowPage+1}">▶</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/board?pager=${map.nowPage+1}">▶ </a></li>
 						</c:if>
 					</ul>
 				</div>					
 				<!-- pager 추가 -->
-				
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board/write" id="new-book">글쓰기</a>
-				</div>				
+					<c:choose>
+						<c:when test="${not empty authUser}">
+							<a href="${pageContext.request.contextPath }/board/write" id="new-book">글쓰기</a>
+						</c:when>
+					<c:otherwise>
+							&nbsp;
+					</c:otherwise>
+				</c:choose>				
+				</div>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp">
