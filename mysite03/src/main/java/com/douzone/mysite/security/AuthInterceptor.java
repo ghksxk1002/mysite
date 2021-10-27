@@ -54,6 +54,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		String role = auth.role();
 
 		// 8. @Auth의 role이 "USER" 인 경우, authUser의 role은 상관없다.
+		System.out.println("들어온녀석롤:"+authUser.getRole());
 		if ("USER".equals(role)) {
 			return true;
 		}
