@@ -39,7 +39,9 @@ public class BoardController {
 			@PathVariable("no") Long no,
 			Model model) {
 		BoardVo vo = boardService.showContents(no);
+		System.out.println(vo);
 		model.addAttribute("vo", vo);
+		
 		return "board/view";
 	}
 	

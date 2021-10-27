@@ -42,6 +42,14 @@ public class BoardRepository {
 	public boolean update(BoardVo vo) {
 		return 1 == sqlSession.update("board.update", vo);
 	}
+
+	public boolean reply(BoardVo vo) {
+		return 1 == sqlSession.update("board.reply", vo);
+	}
+
+	public BoardVo findGroupNo(Long no) {
+		return sqlSession.selectOne("board.findGroupNo", no);
+	}
 	
 	
 }

@@ -47,6 +47,13 @@ public class BoardService {
 	}
 
 	public boolean write(BoardVo vo) {
+		
+		if(vo.getNo() != null) {
+			BoardVo gn = boardRepository.findGroupNo(vo.getNo());
+			System.out.println(gn);
+			//return boardRepository.insert(ll);
+		}
+		
 		return boardRepository.insert(vo);
 	}
 	
