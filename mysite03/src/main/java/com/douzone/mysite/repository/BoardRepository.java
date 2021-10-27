@@ -44,11 +44,15 @@ public class BoardRepository {
 	}
 
 	public boolean reply(BoardVo vo) {
-		return 1 == sqlSession.update("board.reply", vo);
+		return 1 == sqlSession.insert("board.reply", vo);
 	}
 
 	public BoardVo findGroupNo(Long no) {
 		return sqlSession.selectOne("board.findGroupNo", no);
+	}
+
+	public boolean updateHit(Long no) {
+		return 1 == sqlSession.update("board.updateHit", no);
 	}
 	
 	

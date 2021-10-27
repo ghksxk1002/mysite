@@ -43,15 +43,22 @@ public class BoardService {
 	}
 
 	public BoardVo showContents(Long no) {
+		boardRepository.updateHit(no);
 		return boardRepository.findByTitleandContents(no);
 	}
 
 	public boolean write(BoardVo vo) {
 		
+		System.out.println(vo.getNo());
 		if(vo.getNo() != null) {
 			BoardVo gn = boardRepository.findGroupNo(vo.getNo());
-			System.out.println(gn);
-			//return boardRepository.insert(ll);
+			
+			System.out.println("답글 받아오기:"+gn);
+			vo.setGroupNo(gn.getGroupNo());
+			vo.setOrderNo(gn.getOrderNo() + 1);
+			vo.setDepth(gn.getDepth()+1);
+			System.out.println("답글 받아온후:"+vo);
+			return boardRepository.reply(vo);
 		}
 		
 		return boardRepository.insert(vo);

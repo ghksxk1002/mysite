@@ -38,11 +38,19 @@
 		]]>
 	</select>
 	
-	<select id="updateHit" parameterType="map" resultType="boardvo">
+	<select id="findGroupNo" parameterType="long" resultType="boardvo">
 		<![CDATA[ 
-		update board set hit = #{hit} +1 where no =#{no}
+		select group_no as groupNo, order_no as orderNo, depth_no as depth from board where no=#{no}
 		]]>
 	</select>
+	
+	<select id="updateHit" parameterType="map" resultType="boardvo">
+		<![CDATA[ 
+		update board set hit = hit+1 where no =#{no}
+		]]>
+	</select>
+	
+	
 	
 	<select id="update" parameterType="boardvo">
 		<![CDATA[ 
@@ -51,16 +59,21 @@
 	</select>
 	
 	<insert id="insert"  parameterType="boardvo">
-
 		<![CDATA[ 
 		insert into board values(null, #{title}, #{contents}, default, now(), ifnull((select max(group_no) from board b), 0)+1, 0, 0, #{userNo})
 		]]>
-		
 		<selectKey keyProperty="no" resultType="long" order="AFTER">
 		<![CDATA[
 		select last_insert_id();
 		]]>	
 		</selectKey>
+	</insert>
+	
+	<insert id="reply"  parameterType="boardvo">
+		<![CDATA[ 
+		insert into board values(null, #{title}, #{contents}, default, now(), #{groupNo}, #{orderNo}, #{depth}, #{userNo})
+		]]>
+
 	</insert>
 	
 	<delete id="delete" parameterType="boardvo">
