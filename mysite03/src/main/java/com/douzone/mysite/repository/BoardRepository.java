@@ -16,15 +16,16 @@ public class BoardRepository {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<BoardVo> findAll(Long nowPage) {
+	public List<BoardVo> findAll(Long nowPage, String kwd) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "startIndex", (nowPage-1)*5 );
+		map.put("kwd", kwd);
 		return sqlSession.selectList( "board.findAll", map );
 	}
 
-	public Long findByListLength() {
-		return sqlSession.selectOne("board.findByListLength");
+	public Long findByListLength(String kwd) {
+		return sqlSession.selectOne("board.findByListLength", kwd);
 	}
 
 	public BoardVo findByTitleandContents(Long no) {

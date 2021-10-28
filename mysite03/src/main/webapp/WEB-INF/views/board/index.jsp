@@ -14,7 +14,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="${pageContext.servletContext.contextPath }/search" method="post">
+				<form id="search_form" action="${pageContext.servletContext.contextPath }/board" method="post">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -62,7 +62,7 @@
 				<div class="pager">
 					<ul>
 						<c:if test="${map.nowPage != 1 }">
-							<li><a href="${pageContext.servletContext.contextPath }/board?pager=${map.nowPage-1}">◀</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/board?pager=${map.nowPage-1}&kwd=${map.kwd}">◀</a></li>
 						</c:if>
 							<c:forEach begin="${map.start }" end="${map.end }" var="pager" step="1">
 								<c:choose>
@@ -70,7 +70,7 @@
 										<li class="selected">${pager }</li>
 									</c:when>
 										<c:when test="${pager <= map.lastPage}">
-											<li><a href="${pageContext.servletContext.contextPath }/board?pager=${pager}" >${pager }</a></li>						
+											<li><a href="${pageContext.servletContext.contextPath }/board?pager=${pager}&kwd=${map.kwd}" >${pager }</a></li>						
 										</c:when>
 									<c:otherwise>
 										<li>${pager }</li>
@@ -78,7 +78,7 @@
 								</c:choose>
 							</c:forEach>
 						<c:if test="${map.nowPage < map.lastPage }">
-							<li><a href="${pageContext.servletContext.contextPath }/board?pager=${map.nowPage+1}">▶ </a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/board?pager=${map.nowPage+1}&kwd=${map.kwd}">▶ </a></li>
 						</c:if>
 					</ul>
 				</div>					

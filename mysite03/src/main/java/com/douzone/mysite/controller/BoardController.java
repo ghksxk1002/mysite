@@ -2,8 +2,6 @@ package com.douzone.mysite.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +25,12 @@ public class BoardController {
 	@RequestMapping("")
 	public String index(
 			@RequestParam(value = "pager", required = true, defaultValue = "1") Long nowPage,
+			@RequestParam(value = "kwd", required = true, defaultValue = "") String kwd,
 			@AuthUser UserVo authUser,
 			Model model) {
-		Map<String, Object> map = boardService.getContentsList(nowPage);
+		Map<String, Object> map = boardService.getContentsList(nowPage, kwd);
 		model.addAttribute("map", map);
+		System.out.println(map);
 		return "board/index";
 	}
 	
