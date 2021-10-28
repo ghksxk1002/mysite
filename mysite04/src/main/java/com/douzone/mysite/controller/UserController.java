@@ -28,6 +28,11 @@ public class UserController {
 		return "user/join";
 	}
 	
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public String login() {
+		return "user/login";
+	}
+	
 	@RequestMapping(value="/join", method = RequestMethod.POST)
 	//@ModelAttribute @Valid UserVo vo -- > UserVo의 이름으로 잘못입력한 값을 model에 담아줌 = model.addAttribute("userVo", uservo); 이것과 같다
 	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result, Model model) {
@@ -57,7 +62,7 @@ public class UserController {
 	public String joinsuccess() {
 		return "user/joinsuccess";
 	}
-	 	
+	 
 //	@RequestMapping(value ="/logout", method = RequestMethod.GET)
 //	public String logout(HttpSession session) {
 //		session.removeAttribute("authUser");
@@ -93,10 +98,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/auth", method=RequestMethod.POST)
-	public void login() {
+	public void auth() {
 	}
 	
-	@RequestMapping(value="/auth", method=RequestMethod.GET)
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public void logout() {
 	}
 	

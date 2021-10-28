@@ -11,14 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.douzone.mysite.exception.GalleryServiceException;
 import com.douzone.mysite.repository.SiteRepository;
-import com.douzone.mysite.vo.GalleryVo;
 import com.douzone.mysite.vo.SiteVo;
 
 @Service
 public class SiteService {
 
 	private static String SAVE_PATH = "/upload-mysite";
-	private static String URL_BASE = "/gallery/images";
+	private static String URL_BASE = "/images";
 	
 	@Autowired
 	SiteRepository siteRepository;
@@ -26,8 +25,12 @@ public class SiteService {
 	public SiteVo getSite() {
 		return siteRepository.find();
 	}
+	
+	public boolean update(SiteVo site) {
+		return siteRepository.update(site);
+	}
 
-	public String ImageUploader(SiteVo site, MultipartFile multipartFile) {
+	public String ImageUploader(SiteVo site, MultipartFile multipartFile) throws GalleryServiceException{
 		
 		
 		// 업로드된 이미지 파일을 저장할 새로운 디렉도리 파일 생성
@@ -56,14 +59,12 @@ public class SiteService {
 			os.write(data);
 			os.close();
 
-			SiteVo vo = new SiteVo();
-			//vo.setUrl(URL_BASE + "/" + saveFileName);
+			return	URL_BASE + "/" + saveFileName;
 
 			//siteRepository.insert(vo);
 		} catch (Exception e) {
 			throw new GalleryServiceException("file upload error:" + e);
 		}
-		return null;
 	}
 	
 	private String generateSavaFileName(String extName) {

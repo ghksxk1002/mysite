@@ -41,8 +41,6 @@ public class AdminController {
 			System.out.println("이미지가 업로드 안됬으니까 정신차려");
 		}
 		
-		System.out.println(site);
-		
 		siteService.update(site);
 		servletContext.setAttribute("site", site);
 		

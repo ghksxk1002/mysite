@@ -22,15 +22,16 @@ public class FileUploadConfig extends WebMvcConfigurerAdapter {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setMaxUploadSize(env.getProperty("fileupload.maxUploadSize", Long.class));
 		multipartResolver.setMaxInMemorySize(env.getProperty("fileupload.maxInMemorySize", Integer.class));
-		multipartResolver.setDefaultEncoding("fileupload.defaultEncoding");
+		multipartResolver.setDefaultEncoding(env.getProperty("fileupload.defaultEncoding"));
 
 		return multipartResolver;
 	}
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// 업로드 되는에 + 가상 url
 		registry
 			.addResourceHandler(env.getProperty("fileupload.resourceMapping"))
-			.addResourceLocations("flie:"+env.getProperty("fileupload.uploadLocation"));
+			.addResourceLocations("file:"+env.getProperty("fileupload.uploadLocation"));
 	}	
 }

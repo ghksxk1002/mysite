@@ -35,7 +35,7 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public HandlerInterceptor logOutInterceptor() {
+	public HandlerInterceptor logoutInterceptor() {
 		return new LogoutInterceptor();
 	}
 	
@@ -52,22 +52,16 @@ public class SecurityConfig extends WebMvcConfigurerAdapter {
 			.addPathPatterns("/user/auth");
 		
 		registry
-			.addInterceptor(logOutInterceptor())
+			.addInterceptor(logoutInterceptor())
 			.addPathPatterns("/user/logout");
 		
 		registry
 			.addInterceptor(authInterceptor())
-			.addPathPatterns("/user/auth")
-			.addPathPatterns("/user/logout")
-			.addPathPatterns("/assets/**");
+			.addPathPatterns("/**")
+			.excludePathPatterns("/user/auth")
+			.excludePathPatterns("/user/logout")
+			.excludePathPatterns("/assets/**");	
 		
-	
-	
-	}
-
-	
-	
-	
-	
+	}	
 	
 }
