@@ -1,16 +1,16 @@
 package com.douzone.mysite.controller;
 
-import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.douzone.mysite.security.Auth;
 import com.douzone.mysite.security.AuthUser;
 import com.douzone.mysite.service.UserService;
@@ -35,7 +35,7 @@ public class UserController {
 		// 발리드 값 셋팅
 		// 1. reuslt에 에러가 있느닞 확인
 		if(result.hasErrors()) {
-			List<ObjectError> list = result.getAllErrors();
+			//List<ObjectError> list = result.getAllErrors();
 //			for(ObjectError error : list) {
 //				출력되는 에러내용을 사용자에게 알려주기위해 join으로 돌려주어야 한다
 //				그러기 위해서는 result 안에 리스트로 들어가 있는 에러내용을 뽑아내야 한는데
@@ -57,12 +57,7 @@ public class UserController {
 	public String joinsuccess() {
 		return "user/joinsuccess";
 	}
-	 
-	@RequestMapping(value ="/login", method = RequestMethod.GET)
-	public String login() {
-		return "user/login";
-	}
-	
+	 	
 //	@RequestMapping(value ="/logout", method = RequestMethod.GET)
 //	public String logout(HttpSession session) {
 //		session.removeAttribute("authUser");
@@ -96,4 +91,13 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value="/auth", method=RequestMethod.POST)
+	public void login() {
+	}
+	
+	@RequestMapping(value="/auth", method=RequestMethod.GET)
+	public void logout() {
+	}
+	
 }
