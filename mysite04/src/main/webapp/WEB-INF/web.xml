@@ -8,7 +8,7 @@
 	<!-- 자바컴피그를 사용하기 위해 어플리케이션이 뜰때 스프링 컨테이너의 객체라는 것을 알려준다 : 얘가 AppContext를 읽는다 -->
 	<context-param>
 		<param-name>contextClass</param-name>
-		<param-value>org.springframework.web.context.support.AnntationConfigWebApplicationContext</param-value>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
 	</context-param>
 	
 	<context-param>
@@ -40,8 +40,16 @@
 	<!-- Dispatcher Servlet -->
 	<servlet>
 		<servlet-name>spring</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-name>com.douzone.mysite.config.WebConfig</param-name>			
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>

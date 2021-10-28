@@ -3,8 +3,11 @@ package com.douzone.config.app;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 // 여기가 DB 설정을 자바 컴피그로 한다
 // 컨테이너에 데이터 소르를 만들어준다
@@ -19,19 +22,23 @@ import org.springframework.context.annotation.Configuration;
 	요걸 만들어주는 작업
  */
 @Configuration
+@PropertySource("classpath:com/douzone/mysite/config/app/jdbc.properties")
 public class DBConfig {
+	
+	@Autowired
+	private Environment env;
 	
 	@Bean
 	public DataSource dataSource() {
 		
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/webdb?characterEncoding=utf8");
-		dataSource.setUsername("webdb");
-		dataSource.setPassword("webdb");
-		dataSource.setInitialSize(100);
-		dataSource.setMaxActive(200);
+		dataSource.setDriverClassName(env.getProperty("jdbc.diriverCalssName"));
+		dataSource.setUrl(env.getProperty("jdbc.url"));
+		dataSource.setUsername(env.getProperty("jdbc.userName"));
+		dataSource.setPassword(env.getProperty("jdbc.password"));
+		dataSource.setInitialSize(env.getProperty("jdbc.initialSize",Integer.class));
+		dataSource.setMaxActive(env.getProperty("jdbc.maxActive", Integer.class));
 		
-		return dataSource();
+		return dataSource;
 	}
 }
