@@ -16,7 +16,7 @@
 					<input type='hidden' name="no" value="${no }"> 
 					<input type="password" name="password"> <input type="submit" value="확인">
 				</form>
-				<br /> <a href="${pageContext.request.contextPath }/gb/index">메인으로돌아가기</a>
+				<br /> <a href="${pageContext.request.contextPath }/gb">메인으로돌아가기</a>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
