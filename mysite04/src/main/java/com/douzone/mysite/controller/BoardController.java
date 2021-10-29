@@ -27,9 +27,10 @@ public class BoardController {
 	@RequestMapping("")
 	public String index(
 			@RequestParam(value = "pager", required = true, defaultValue = "1") Long nowPage,
+			@RequestParam(value = "kwd", required = true, defaultValue = "") String kwd,
 			@AuthUser UserVo authUser,
 			Model model) {
-		Map<String, Object> map = boardService.getContentsList(nowPage);
+		Map<String, Object> map = boardService.getContentsList(nowPage, kwd);
 		model.addAttribute("map", map);
 		return "board/index";
 	}

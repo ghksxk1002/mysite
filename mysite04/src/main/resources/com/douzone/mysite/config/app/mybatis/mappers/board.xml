@@ -32,10 +32,19 @@
 		]]>
 	</select>
 	
-	<select id="findByListLength" resultType="long">
-		<![CDATA[ 
-		select count(*) from board
-		]]>
+	<select id="findByListLength" parameterType="string" resultType="long" >
+		<choose>
+			<when test="_parameter==null or _parameter==''">
+				<![CDATA[ 
+					select count(*) from board
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[ 
+					select count(*) from board where title like '%${_parameter}%'
+				]]>
+			</otherwise>
+		</choose>
 	</select>
 	
 	<select id="findGroupNo" parameterType="long" resultType="boardvo">

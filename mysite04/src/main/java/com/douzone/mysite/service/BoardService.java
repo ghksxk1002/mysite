@@ -16,10 +16,10 @@ public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
 
-	public Map<String, Object> getContentsList(Long nowPage) {
+	public Map<String, Object> getContentsList(Long nowPage, String kwd) {
 
 		// board의 총 길이
-		Long count = boardRepository.findByListLength();
+		Long count = boardRepository.findByListLength(kwd);
 
 		Long lastPage = (count - 1) / 5 + 1;
 
@@ -32,7 +32,8 @@ public class BoardService {
 		List<BoardVo> list = boardRepository.findAll(nowPage);
 		// 리스트에 답은 내용은 "list"라는 이름으로 request에 담아 놓는다
 		Map<String, Object> map = new HashMap<String, Object>();
-
+		
+		map.put("kwd", kwd);
 		map.put("list", list);
 		map.put("count", count);
 		map.put("lastPage", lastPage);

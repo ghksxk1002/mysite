@@ -23,8 +23,8 @@ public class BoardRepository {
 		return sqlSession.selectList( "board.findAll", map );
 	}
 
-	public Long findByListLength() {
-		return sqlSession.selectOne("board.findByListLength");
+	public Long findByListLength(String kwd) {
+		return sqlSession.selectOne("board.findByListLength", kwd);
 	}
 
 	public BoardVo findByTitleandContents(Long no) {
