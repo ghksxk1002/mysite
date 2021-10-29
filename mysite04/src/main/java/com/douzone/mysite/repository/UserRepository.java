@@ -25,12 +25,12 @@ public class UserRepository {
 	}
 	
 	public boolean update(UserVo vo) {
-		int count = sqlSession.update("update", vo);
+		int count = sqlSession.update("user.update", vo);
 		return count == 1;
 	}
 
 	public UserVo findByNo(Long no) throws UserRepositoryException {
-		return sqlSession.selectOne("findByNo",no);
+		return sqlSession.selectOne("user.findByNo",no);
 	}
 	
 	public UserVo findByEmail(String email) {
