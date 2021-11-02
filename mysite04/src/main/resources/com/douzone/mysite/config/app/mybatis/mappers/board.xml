@@ -15,15 +15,27 @@
 	</resultMap>
 	
 	<select id="findAll" resultMap="resultMapList" parameterType="map" resultType="boardvo">
-		<![CDATA[ 
-		select b.no, b.title, u.name, b.contents, b.hit, b.reg_date, b.group_no, b.order_no, b.depth_no, u.no as user_no
-		  from board b, user u
-		 where b.user_no = u.no
-	  order by group_no desc, order_no asc
-		 limit #{startIndex},5
-		]]>
-		
-		
+		<choose>
+			<when test="kwd==null or kwd==''">
+				<![CDATA[ 
+					select b.no, b.title, u.name, b.contents, b.hit, b.reg_date, b.group_no, b.order_no, b.depth_no, u.no as user_no
+					  from board b, user u
+				 	 where b.user_no = u.no
+				  order by group_no desc, order_no asc
+					 limit #{startIndex},5
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[ 
+					select b.no, b.title, u.name, b.contents, b.hit, b.reg_date, b.group_no, b.order_no, b.depth_no, u.no as user_no
+					  from board b, user u
+				 	 where b.user_no = u.no
+				 	   and title like '%${kwd }%'
+				  order by group_no desc, order_no asc
+					 limit #{startIndex},5
+				]]>
+			</otherwise>
+		</choose>
 	</select>
 	
 	<select id="findByTitleandContents" parameterType="long" resultType="boardvo">
