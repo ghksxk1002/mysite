@@ -90,6 +90,7 @@ public class BoardController {
 	@RequestMapping(value="/delete/{no}", method = RequestMethod.GET)
 	public String delete(
 			@PathVariable("no") Long no) {
+		boardService.delete(no);
 		return "redirect:/board";
 	}
 }

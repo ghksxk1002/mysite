@@ -2,8 +2,6 @@ package com.douzone.mysite.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,6 +89,8 @@ public class BoardController {
 	@RequestMapping(value="/delete/{no}", method = RequestMethod.GET)
 	public String delete(
 			@PathVariable("no") Long no) {
+		boardService.delete(no);
+		System.out.println("[delete]"+no);
 		return "redirect:/board";
 	}
 }
