@@ -10,7 +10,7 @@
 	<artifactId>mysite02</artifactId>
 	<packaging>war</packaging>
 
-
+  
 	<dependencies>
 		<!-- jstl -->
 		<dependency>
