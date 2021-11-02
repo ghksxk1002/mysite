@@ -8,15 +8,22 @@ spring:
 # common spring configuration
 
 spring:
+
+
+
    # devtools
    devtools:
       livereload:
          enabled: true
+
+
    # MVC
    mvc:
       view:
          prefix: /WEB-INF/views/
          suffix: .jsp
+
+
    # http (filter)
    http:
       encoding:
@@ -26,11 +33,13 @@ spring:
          forced-request: false
          forced-response: false
 
+
    # message resource (Internationalization)
    messages:
       always-message-format: true
       basename: messages/messages_ko
       encoding: utf-8
+
 
    # multipart
    servlet:
@@ -39,15 +48,16 @@ spring:
          max-file-size: 50MB
          max-request-size: 50MB
 
+
    # aop(@EnableAspectAutoProxy)
-   aop:
-      auto: true
-      proxy-target-class: true
+   aop.auto: true
+   proxy-target-class: true
 
 ---
 # production profile - sping boot configuration
 spring:
    profile: production
+
    # datesource
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
