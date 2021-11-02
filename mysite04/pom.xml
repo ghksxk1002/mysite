@@ -18,7 +18,7 @@
 	</properties>
 
 	<dependencies>
-		<!-- Spring Context(Container) -->
+		<!-- S pring Context(Container) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
