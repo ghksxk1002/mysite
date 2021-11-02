@@ -24,7 +24,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		// new 를 해버리면 스프링이 만든것이 아니라 내가 만든것이기 때문에 스픠링에서 제어할수 없서
 		// 유저 레파지토리가 null 이된다1
 		UserVo authUser = userService.getUser(email, password);
-		System.out.println(authUser);
 		if(authUser == null) {
 			request.setAttribute("result", "fail");
 			request.getRequestDispatcher("/WEB-INF/views/user/login.jsp")
