@@ -20,7 +20,7 @@ import org.springframework.core.env.Environment;
 		<property name="password" value="webdb" />
 	</bean>
 	요걸 만들어주는 작업
- */
+ */  
 @Configuration
 @PropertySource("classpath:com/douzone/mysite/config/app/jdbc.properties")
 public class DBConfig {
