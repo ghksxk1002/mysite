@@ -3,6 +3,8 @@ package com.douzone.mysite.controller;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,7 +76,7 @@ public class UserController {
 	@Auth
 	@RequestMapping(value ="/update", method = RequestMethod.GET)
 	public String update(@AuthUser UserVo authUser, Model model) {
-	
+		
 		UserVo userVo = userService.getUser(authUser.getNo());
 		model.addAttribute("userVo",userVo);
 		
