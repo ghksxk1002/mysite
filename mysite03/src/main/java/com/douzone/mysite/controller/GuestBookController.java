@@ -1,5 +1,7 @@
 package com.douzone.mysite.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +20,13 @@ public class GuestBookController {
 	
 	@RequestMapping("")
 	public String index(Model model) {
-		guestBookService.index(model);
+		List<GuestbookVo> list = guestBookService.findAll();
+		model.addAttribute("list", list);
 		return "guestbook/index";
 	}
 	
 	@RequestMapping("/spa")
-	public String spa() {
+	public String spa(Model model) {
 		return "guestbook/index-spa";
 	}
 

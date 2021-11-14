@@ -21,11 +21,6 @@ public class UserController {
 	@GetMapping("/checkemail")
 	public JsonRrsult checkemail(@RequestParam(value="email", required=true, defaultValue="") String email) {
 		UserVo userVo = userService.getUser(email);
-//		
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("date", userVo != null);
-//		map.put("result", "success");
-//		map.put("message", null);
 		return JsonRrsult.success(userVo != null);
 	}
 }

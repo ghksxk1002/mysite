@@ -20,11 +20,15 @@
 		]]>
 	</delete>
 	
-	<select id="findAll" resultType="guestbookvo">
-		<![CDATA[
+	<select id="findAll" resultType="guestbookvo" parameterType="long">
 			select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regdate, message 
 			  from guestbook 
-	      order by reg_date desc
-		]]>
+			  <if test="value != -1">
+			  <![CDATA[
+			  	where no < #{value}
+			  ]]>
+			  </if>
+	      order by no desc
+	      	 limit 3
 	</select>
 </mapper>
