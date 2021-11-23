@@ -25,7 +25,6 @@ public class GuestBookController {
 	@RequestMapping("/list")
 	public JsonRrsult list(@RequestParam(value="sn", required=true, defaultValue="-1") Long no) {
 		List<GuestbookVo> list = guestBookService.findAll(no);
-		System.err.println(list);
 		return JsonRrsult.success(list);
 	}
 	

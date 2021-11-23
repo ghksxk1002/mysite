@@ -7,15 +7,10 @@
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/guestbook-spa.css"
-	rel="stylesheet" type="text/css">
-<link rel="stylesheet"
-	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/ejs/ejs.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/guestbook-spa.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/ejs/ejs.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <script>
@@ -49,8 +44,7 @@
 	var startNo;
 	// 글 리스트 불러오기
 	var fetch = function() {
-		var url = '${pageContext.request.contextPath}/api/gb/list'
-				+ (startNo ? ('?sn=' + startNo) : '')
+		var url = '${pageContext.request.contextPath}/api/gb/list' + (startNo ? ('?sn=' + startNo) : '')
 		console.log(startNo)
 		$.ajax({
 			url : url,
@@ -83,40 +77,28 @@
 									var no = $('#hidden-no').val();
 									var password = $('#password-delete').val();
 									// 때ㅔ려야될 url
-									var url = '${pageContext.request.contextPath}/api/gb/delete/'
-											+ no;
+									var url = '${pageContext.request.contextPath}/api/gb/delete/' + no;
 
-									$
-											.ajax({
-												url : url,
-												type : 'post',
-												dataType : 'json',
-												data : 'password=' + password,
-												success : function(response) {
-													console.log(response)
+							$.ajax({
+										url : url,
+										type : 'post',
+										dataType : 'json',
+										data : 'password=' + password,
+										success : function(response) {
+											console.log(response)
 
-													if (response.data == -1) {
-														$('.validateTips.error')
-																.show();
-														$('#password-delete')
-																.val('')
-																.focus();
-														return;
-													}
-													$(
-															'#list-guestbook li[data-no='
-																	+ response.data
-																	+ ']')
-															.remove();
-													$('#password-delete').val(
-															'');
-													$(".validateTips.error")
-															.hide();
-													dialogDelete
-															.dialog('close');
-												}
+											if (response.data == -1) {
+												$('.validateTips.error').show();
+												$('#password-delete').val('').focus();
+												return;
+											}
+											$('#list-guestbook li[data-no='+ response.data+ ']').remove();
+											$('#password-delete').val('');
+											$(".validateTips.error").hide();
+											dialogDelete.dialog('close');
+										}
 
-											});
+									});
 								},
 								"취소" : function() {
 									$('#password-delete').val('');
@@ -125,8 +107,6 @@
 								}
 							}
 						});
-
-		// dialogDelete.dialog('open');
 
 		// 글삭제 버튼
 		$(document).on('click', '#list-guestbook li a', function(event) {
@@ -140,9 +120,8 @@
 		});
 
 		// form valiation
-		$("#add-form").submit(function(event) {
+		$("#add-form").submit(function() {
 			// 이름
-			event.preventDefault();
 			var vo = {};
 
 			vo.name = $('#input-name').val();
@@ -233,11 +212,9 @@
 				<p class="validateTips normal">작성시 입력했던 비밀번호를 입력하세요.</p>
 				<p class="validateTips error" style="display: none">비밀번호가 틀립니다.</p>
 				<form>
-					<input type="password" id="password-delete" value=""
-						class="text ui-widget-content ui-corner-all"> <input
-						type="hidden" id="hidden-no" value=""> <input
-						type="submit" tabindex="-1"
-						style="position: absolute; top: -1000px">
+					<input type="password" id="password-delete" value="" class="text ui-widget-content ui-corner-all"> 
+					<input type="hidden" id="hidden-no" value=""> 
+					<input type="submit" tabindex="-1" style="position: absolute; top: -1000px">
 				</form>
 			</div>
 			<div id="dialog-message" title="새글작성" style="display: none">
