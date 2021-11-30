@@ -67,6 +67,8 @@
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 	
+
+	
 	 <!-- 6. MessageSource : vlaid 메세지 커스텀-->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 	   <property name="basenames">

@@ -7,5 +7,6 @@
 				<li><a href="${pageContext.request.contextPath }/gb">방명록</a></li>
 				<li><a href="${pageContext.request.contextPath }/board">게시판</a></li>
 				<li><a href="${pageContext.request.contextPath }/gallery">겔러리</a></li>
+				<li><a href="${pageContext.request.contextPath }/email">이메일 보내기</a></li>
 			</ul>
 		</div>

@@ -44,7 +44,21 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	
-	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="ghksxk1006@gmail.com"/>
+		<property name="password" value="tpgxqqtdbdtjajpg"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">smtp</prop>
+			</props>	
+		</property>
+	</bean>	
 	
 	<context:annotation-config />
 	<!-- 스케닝 위치 -->
