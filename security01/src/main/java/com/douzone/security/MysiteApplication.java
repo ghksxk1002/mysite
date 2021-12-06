@@ -1,4 +1,4 @@
-package com.douzone.mysite;
+package com.douzone.security;
  
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

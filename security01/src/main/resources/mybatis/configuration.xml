@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- 숏컷 말들기 alias는 소문자로 하는것이 관래, type이 내가 만들 숏컷 alias는 별병 : 파라미터 맵핑을 ㅎ나것이다-->
+		<typeAlias type="com.douzone.security.vo.UserVo" alias="uservo" />
+    </typeAliases>	
+	<mappers>
+		<mapper resource="mybatis/mappers/user.xml" />
+	</mappers>
+</configuration>

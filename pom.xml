@@ -74,5 +74,6 @@
 		<module>mysite04</module>
 		<module>mysite05</module>
 		<module>mysite06</module>
+		<module>security01</module>
 	</modules>
 </project>

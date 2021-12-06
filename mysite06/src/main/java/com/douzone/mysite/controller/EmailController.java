@@ -23,6 +23,7 @@ public class EmailController {
 	@RequestMapping("/send")
 	public String send(MailVo vo, Model model) {
 		try {
+			System.out.println(vo);
 			emailService.sendMail(vo);
 			model.addAttribute("message", "이메일이발송되었습니다");
 			
