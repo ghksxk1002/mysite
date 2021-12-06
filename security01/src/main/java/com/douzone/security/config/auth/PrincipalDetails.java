@@ -20,7 +20,7 @@ import com.douzone.security.vo.UserVo;
 // Security Session => Authentication 타입의 객체로 유저정보를 저장하고 => 저장할때는 UserDetails 타입이여야 한다
 // 나중에 Security Session에서 유저 객체를 꺼내면 Authentication 객체로 기어나오고 이안의 UserDetails 객체를 꺼내면 유저 객체에 접근을 할수 있다
 // 그러면 userDetails 객체를 꺼낼수 있는가 밑을 봐라
-
+//ㅇㅇ
 
 public class PrincipalDetails implements UserDetails { // UserDetails를 implement를 하면 PrincipalDetails가 UserDetails 와 같은
 														// 타입이 되고 Authentication 객체에 담을
