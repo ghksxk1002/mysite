@@ -3,12 +3,11 @@ package com.douzone.security.config.auth;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.douzone.security.vo.UserVo;
-
+/* 사용자 개체 생성*/
 // 시큐리티가 /login 주소 요청이 오면 url를 낚아채서 로그인을 진행시킨다
 // 로그인이 완료가 되면 session에 시큐리티가 유저의 정보를 넣어준다
 // 단 우리가 만드는 세션과 동일한 세션이지만 시큐리티가 가진 세션공간이 있다()
@@ -65,7 +64,7 @@ public class PrincipalDetails implements UserDetails { // UserDetails를 impleme
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 
 	

@@ -3,6 +3,7 @@ package com.douzone.security.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.douzone.security.service.UserService;
 import com.douzone.security.vo.UserVo;
 
+@CrossOrigin
 @Controller
 public class IndexController {
 	
@@ -25,9 +27,10 @@ public class IndexController {
 		return "index";
 	}
 	
+
 	@GetMapping("/user")
-	public @ResponseBody String user() {
-		return "유저페이지 입니다";
+	public String user() {
+		return "ok";
 	}
 	
 	@GetMapping("/admin")
@@ -45,13 +48,7 @@ public class IndexController {
 	public String loginForm() {
 		return "loginForm";
 	}
-	
-//	@GetMapping("/login")
-//	public String login(UserVo vo) {
-//		System.out.println("안녕유저야"+vo);
-//		return "ok";
-//	}
-	
+
 	@GetMapping("/joinForm")
 	public String joinForm() {
 		return "joinForm";

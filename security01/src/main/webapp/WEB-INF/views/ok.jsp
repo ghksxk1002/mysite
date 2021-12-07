@@ -11,6 +11,9 @@
 </head>
 <body>
 	<h1>로그인에 성공하였습니다</h1>
-	<a href="${pageContext.request.contextPath }/user" >유저화면으로 가기</a>
+	<form action="/logout" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="submit" value="로그아웃"/>
+	</form>
 </body>
 </html>

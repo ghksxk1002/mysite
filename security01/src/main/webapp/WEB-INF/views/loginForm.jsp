@@ -15,6 +15,7 @@
 	<form action="/login" method="post">
 		<input type="text" name="username" placeholder="아이디를 입력하세요"/><br />
 		<input type="password" name="password" placeholder="비밀번호를 입력하세요"/><br />
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<!-- <input type="submit" /><br /> -->
 		<button>로그인</button>
 	</form>

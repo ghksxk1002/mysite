@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.security.repository.UserRepository;
 import com.douzone.security.vo.UserVo;
-
+/* 사용자 명세 서비스 */
+// Authentication 객체 만들기
 // 시큐리티 설정에서 loginProessingUrl("/login");
 // 으로 걸어 놓았기 때문에
 // /login 요청이 오면 자동으로 UserDetailsService 타입으로 IOC 되어있는

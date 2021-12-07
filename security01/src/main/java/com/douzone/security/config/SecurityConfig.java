@@ -15,7 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 	// 이 클래스에 내가 지금 부터 등록할 기본 필터가 등록된다
 	// 그러기 위해서는 이 클래스가 웹 시큐리티 어택터가 되어야 하기 때문에
 	// 인터페이스를 하나 상속받고
@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable(); // Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
+		//http.csrf(); // Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
 		http.authorizeRequests()						// 요청이 들어왔을때	
 			.antMatchers("/user/**").authenticated()	// antMatchers 이 url은 인증이 필요하다는뜻
 			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN')or hasRole('ROLE_MANAGER')") // manger 로 들어오는 요청은 권한이 어드민과 미니저인 사용자만 들어오게
@@ -38,7 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.formLogin()
 			.loginPage("/loginForm")												
 			.loginProcessingUrl("/login")		// login 주소가 호출이 되면 시큐리티가 낙아채서 대신 로그인을 진행 해준다
-			.defaultSuccessUrl("/"); 			// 로그인이 성공하면 기본적으로 내가 지정해준 url로 이동 한다.
+			.defaultSuccessUrl("/")
+			.and()
+			.logout()
+			.logoutUrl("/logout")
+			.logoutSuccessUrl("/loginForm");
 	}
 	
 	@Override
@@ -48,6 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.passwordEncoder(encodePwd());
 	
 	}
+	
+	
 	
 	
 	
