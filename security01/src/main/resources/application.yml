@@ -11,22 +11,7 @@ spring:
    # devtools - live reload
    devtools:
       livereload:
-         enabled: true
-   # Mail
-   mail:
-      host: smtp.gmail.com
-      port: 587
-      username: 'ghksxk1006@gmail.com'
-      password: 'tpgxqqtdbdtjajpg'
-      properties:
-         mail:
-            smtp:
-               auth: true
-               ssl:
-                  protocols: 'TLSv1.2'
-               starttls:
-                  enable: true
-            debug: smtp
+         enabled: tru
    # mvc
    mvc:
       view:
