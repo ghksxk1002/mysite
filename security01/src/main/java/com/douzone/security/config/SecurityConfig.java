@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,19 +27,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	}
 	
+	
+	// resources/static 디렉터리 하위 파일 목록은 인증 무시(항상 통과) 언젠가 쓰일것을 대비
+    @Override
+    public void configure(WebSecurity web)throws Exception{
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**");
+    }
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		//http.csrf(); // Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
+		http.csrf().disable(); // Spring Security에서 제공하는 CSRF protection 기능을 일단 정지
 		http.authorizeRequests()						// 요청이 들어왔을때	
-			.antMatchers("/user/**").authenticated()	// antMatchers 이 url은 인증이 필요하다는뜻
-			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN')or hasRole('ROLE_MANAGER')") // manger 로 들어오는 요청은 권한이 어드민과 미니저인 사용자만 들어오게
-			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+			.antMatchers("/post/**").authenticated()	// antMatchers 이 url은 인증이 필요하다는뜻
+//			.antMatchers("/manager/**").access("hasRole('ROLE_ADMIN')or hasRole('ROLE_MANAGER')") // manger 로 들어오는 요청은 권한이 어드민과 미니저인 사용자만 들어오게
+//			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 			.anyRequest().permitAll()			// 위 세가지의 요청이외에는 모두 권한을 허가하게 만듬
 			.and()
 			.formLogin()
-			.loginPage("/loginForm")												
+			.loginPage("/loginForm")
+			.usernameParameter("userid")
 			.loginProcessingUrl("/login")		// login 주소가 호출이 되면 시큐리티가 낙아채서 대신 로그인을 진행 해준다
-			.defaultSuccessUrl("/")
+			.defaultSuccessUrl("/loginsuccess", true)
 			.and()
 			.logout()
 			.logoutUrl("/logout")

@@ -16,10 +16,7 @@ public class UserRepository {
 		return 1 == sqlsession.insert("user.addUser", vo);
 	}
 
-	public UserVo findByUsername(String username) {
-		System.err.println("여기는 레파지토리");
-		return sqlsession.selectOne("user.findByUsername", username);
+	public UserVo findByUsername(String userid) {
+		return sqlsession.selectOne("user.findByUsername", userid);
 	}
-	
-	
 }	

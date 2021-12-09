@@ -16,4 +16,7 @@ public class UserService {
 		return userRepository.addUser(vo);
 	}
 
+	public UserVo findByUsername(String userid) {
+		return userRepository.findByUsername(userid);
+	}
 }
